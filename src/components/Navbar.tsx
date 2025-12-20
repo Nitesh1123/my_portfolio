@@ -18,7 +18,6 @@ export const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      // Update active section based on scroll position
       const sections = ["about", "projects", "skills", "contact"];
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
@@ -89,17 +88,20 @@ export const Navbar = () => {
             </ul>
 
             {/* Resume Button */}
-            <div className="ml-4">
-              <a
-                href="/CV.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors inline-flex items-center gap-2 whitespace-nowrap"
-              >
-                Resume
-                <span>→</span>
-              </a>
-            </div>
+            <motion.a
+              href="/CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: navLinks.length * 0.1 + 0.4 }}
+            >
+              Resume
+              <span className="text-lg">→</span>
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -149,13 +151,13 @@ export const Navbar = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ delay: navLinks.length * 0.1 }}
-                className="mt-2"
+                className="mt-4 pt-3 border-t border-border/20"
               >
                 <a
                   href="/CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full block text-center py-2 px-4 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-colors"
+                  className="w-full block text-center py-3 px-4 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
                 >
                   Download Resume
                 </a>
