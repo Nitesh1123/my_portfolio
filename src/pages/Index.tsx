@@ -7,6 +7,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
+  // Force re-render
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
