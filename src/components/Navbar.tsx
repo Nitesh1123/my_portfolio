@@ -66,6 +66,16 @@ export const Navbar = () => {
             NK.
           </motion.a>
 
+          {/* Test Resume Button - Right aligned */}
+          <a
+            href="/CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-block px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
+          >
+            Resume →
+          </a>
+
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-8">
             <ul className="flex items-center gap-8">
