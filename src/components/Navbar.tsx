@@ -89,14 +89,17 @@ export const Navbar = () => {
             </ul>
 
             {/* Resume Button */}
-            <a
-              href="/CV.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-4 px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors flex items-center gap-2"
-            >
-              Resume <span className="ml-1">→</span>
-            </a>
+            <div className="ml-4">
+              <a
+                href="/CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors inline-flex items-center gap-2 whitespace-nowrap"
+              >
+                Resume
+                <span>→</span>
+              </a>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
