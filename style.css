@@ -149,6 +149,29 @@ a {
     transform: rotate(-45deg) translate(7px, -7px);
 }
 
+.resume-btn {
+    display: none;
+    padding: 0.65rem 1.5rem;
+    background: var(--primary-green);
+    color: var(--bg-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 0.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.resume-btn:hover {
+    background: #22c55e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(74, 222, 128, 0.3);
+}
+
+.resume-btn:active {
+    transform: translateY(0);
+}
+
 /* ============================================
    Buttons
    ============================================ */
