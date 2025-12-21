@@ -28,8 +28,8 @@ const projects = [
     description:
       "An interactive web-based simulator for visualizing operating system disk scheduling algorithms including FCFS, SCAN, C-SCAN, and more. Features real-time algorithm visualization and performance metrics.",
     technologies: ["JavaScript", "HTML/CSS", "Algorithms"],
-    github: "#",
-    demo: "#",
+    github: "https://github.com/rai-kriti/OS",
+    demo: "https://rai-kriti.github.io/OS/",
   },
 ];
 
