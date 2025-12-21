@@ -20,22 +20,24 @@ export const AboutSection = () => {
           </h2>
         </FadeInLeft>
 
-        <div className="max-w-3xl">
+        <div className="max-w-4xl">
           <FadeInUp delay={0.1}>
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              I'm a passionate{" "}
-              <span className="text-primary font-semibold">Data Scientist & ML Practitioner</span>{" "}
-              with a strong foundation in Computer Science. Currently pursuing my B.Tech at Lovely Professional University, 
-              I'm deeply fascinated by the intersection of data, algorithms, and artificial intelligence.
+              I'm a data-driven engineer focused on building{" "}
+              <span className="text-primary font-semibold">machine learning systems</span> that create measurable impact.
+              As a B.Tech Computer Science student at Lovely Professional University (3rd Year), I combine strong fundamentals in algorithms and data structures with practical experience in ML engineering.
             </p>
           </FadeInUp>
 
           <FadeInUp delay={0.2}>
             <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              My expertise lies in building{" "}
-              <span className="text-primary font-semibold">scalable backend systems</span> and developing 
-              AI-powered applications that solve real-world problems. I enjoy working with Python, TensorFlow, 
-              and modern web technologies to create solutions that are both efficient and impactful.
+              <span className="text-primary font-semibold">Technical Expertise:</span> I specialize in Python for ML, deep learning with TensorFlow, data processing & analysis, and building scalable systems. I've developed multiple end-to-end ML projects including predictive models, visualization dashboards, and web applications with React + Node.js.
+            </p>
+          </FadeInUp>
+
+          <FadeInUp delay={0.25}>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+              <span className="text-primary font-semibold">What I Value:</span> I'm passionate about solving real-world problems with data, writing clean and maintainable code, continuous learning, and collaborating with teams to deliver production-ready solutions.
             </p>
           </FadeInUp>
 
@@ -46,7 +48,7 @@ export const AboutSection = () => {
               transition={{ duration: 0.2 }}
             >
               <MapPin className="text-secondary" size={20} />
-              <span>Based in Nalagarh, India</span>
+              <span>Based in Nalagarh, India • Open to opportunities</span>
             </motion.div>
           </FadeInUp>
         </div>
