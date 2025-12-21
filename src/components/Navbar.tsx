@@ -90,7 +90,7 @@ export const Navbar = () => {
 
             {/* Resume Button */}
             <motion.a
-              href="/CV.pdf"
+              href="CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
