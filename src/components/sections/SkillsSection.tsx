@@ -6,23 +6,42 @@ import { AnimatedCard } from "@/components/animations/AnimatedCard";
 const skillCategories = [
   {
     icon: Code2,
-    title: "Programming Languages",
-    skills: ["Python", "JavaScript", "SQL"],
+    title: "Languages & Core",
+    skills: [
+      { name: "Python", level: "Expert" },
+      { name: "SQL", level: "Advanced" },
+      { name: "JavaScript", level: "Intermediate" },
+    ],
   },
   {
     icon: Brain,
-    title: "Machine Learning & AI",
-    skills: ["TensorFlow", "ML Algorithms", "Neural Networks"],
+    title: "Machine Learning",
+    skills: [
+      { name: "TensorFlow/Keras", level: "Advanced" },
+      { name: "ML Algorithms", level: "Advanced" },
+      { name: "Neural Networks", level: "Intermediate" },
+      { name: "Data Preprocessing", level: "Advanced" },
+    ],
   },
   {
     icon: BarChart3,
-    title: "Data Analytics",
-    skills: ["Power BI", "Data Visualization", "Data Analysis"],
+    title: "Data & Analytics",
+    skills: [
+      { name: "Pandas/NumPy", level: "Advanced" },
+      { name: "Data Visualization", level: "Advanced" },
+      { name: "Statistical Analysis", level: "Intermediate" },
+      { name: "Power BI", level: "Intermediate" },
+    ],
   },
   {
     icon: Globe,
-    title: "Web Technologies",
-    skills: ["React", "Node.js", "MongoDB", "Express"],
+    title: "Web & Backend",
+    skills: [
+      { name: "React", level: "Intermediate" },
+      { name: "Node.js/Express", level: "Intermediate" },
+      { name: "MongoDB", level: "Intermediate" },
+      { name: "REST APIs", level: "Intermediate" },
+    ],
   },
 ];
 
@@ -60,19 +79,30 @@ export const SkillsSection = () => {
 
               {/* Skills */}
               <div className="flex flex-col gap-3">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill}
-                    className="flex items-center gap-3 px-3 py-2 rounded-xl bg-muted/30 border border-border/30 transition-all hover:bg-primary/10 hover:border-primary/30 hover:translate-x-1"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 + skillIndex * 0.05 + 0.3 }}
-                  >
-                    <span className="w-2 h-2 rounded-full bg-primary" />
-                    <span className="text-muted-foreground font-medium text-sm">{skill}</span>
-                  </motion.div>
-                ))}
+                {category.skills.map((skill, skillIndex) => {
+                  const skillItem = typeof skill === "string" ? { name: skill, level: "Proficient" } : skill;
+                  const levelColor =
+                    skillItem.level === "Expert" ? "text-primary" :
+                    skillItem.level === "Advanced" ? "text-secondary" :
+                    "text-accent";
+
+                  return (
+                    <motion.div
+                      key={skillItem.name}
+                      className="flex items-center justify-between px-3 py-2 rounded-xl bg-muted/30 border border-border/30 transition-all hover:bg-primary/10 hover:border-primary/30"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 + skillIndex * 0.05 + 0.3 }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="w-2 h-2 rounded-full bg-primary" />
+                        <span className="text-muted-foreground font-medium text-sm">{skillItem.name}</span>
+                      </div>
+                      <span className={`text-xs font-semibold ${levelColor}`}>{skillItem.level}</span>
+                    </motion.div>
+                  );
+                })}
               </div>
             </AnimatedCard>
           ))}

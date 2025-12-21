@@ -81,14 +81,34 @@ export const HeroSection = () => {
 
           {/* Description */}
           <motion.p
-            className="text-muted-foreground text-lg leading-relaxed mb-10 max-w-xl"
+            className="text-muted-foreground text-lg leading-relaxed mb-8 max-w-2xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            B.Tech Computer Science student at LPU (3rd Year) specializing in Data Science & Machine Learning. 
-            I transform raw data into meaningful insights and build scalable backend architectures for AI-driven applications.
+            B.Tech Computer Science (3rd Year) at LPU specializing in Data Science & ML. I build AI models that solve real problems—from predictive systems to scalable backend architectures. Passionate about turning complex data into actionable insights.
           </motion.p>
+
+          {/* Key Metrics */}
+          <motion.div
+            className="flex flex-wrap gap-8 mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.55 }}
+          >
+            <div className="flex flex-col">
+              <span className="text-2xl md:text-3xl font-bold text-primary">5+</span>
+              <span className="text-sm text-muted-foreground">ML Projects</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-2xl md:text-3xl font-bold text-secondary">Python</span>
+              <span className="text-sm text-muted-foreground">Expert Level</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-2xl md:text-3xl font-bold text-accent">DS & ML</span>
+              <span className="text-sm text-muted-foreground">Core Focus</span>
+            </div>
+          </motion.div>
 
           {/* Buttons */}
           <motion.div
