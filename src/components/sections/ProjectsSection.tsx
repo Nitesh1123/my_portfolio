@@ -28,8 +28,8 @@ const projects = [
     description:
       "An interactive web-based simulator for visualizing operating system disk scheduling algorithms including FCFS, SCAN, C-SCAN, and more. Features real-time algorithm visualization and performance metrics.",
     technologies: ["JavaScript", "HTML/CSS", "Algorithms"],
-    github: "#",
-    demo: "#",
+    github: "https://github.com/rai-kriti/OS",
+    demo: "https://rai-kriti.github.io/OS/",
   },
 ];
 
@@ -89,6 +89,8 @@ export const ProjectsSection = () => {
               <div className="flex gap-3">
                 <motion.a
                   href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-muted/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
                   whileHover={{ y: -3 }}
                   whileTap={{ scale: 0.95 }}
@@ -97,6 +99,8 @@ export const ProjectsSection = () => {
                 </motion.a>
                 <motion.a
                   href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-muted/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
                   whileHover={{ y: -3 }}
                   whileTap={{ scale: 0.95 }}
