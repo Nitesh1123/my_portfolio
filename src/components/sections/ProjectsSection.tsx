@@ -34,6 +34,20 @@ const projects = [
 ];
 
 export const ProjectsSection = () => {
+  const handleGithubClick = (githubUrl: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    if (githubUrl && githubUrl !== "#") {
+      window.open(githubUrl, "_blank");
+    }
+  };
+
+  const handleDemoClick = (demoUrl: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    if (demoUrl && demoUrl !== "#") {
+      window.open(demoUrl, "_blank");
+    }
+  };
+
   return (
     <section id="projects" className="py-24 relative">
       <div
@@ -87,22 +101,24 @@ export const ProjectsSection = () => {
 
               {/* Links */}
               <div className="flex gap-3">
-                <motion.button
-                  onClick={() => window.open(project.github, "_blank")}
+                <motion.a
+                  href={project.github}
+                  onClick={(e) => handleGithubClick(project.github, e)}
                   className="w-10 h-10 rounded-full bg-muted/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all cursor-pointer"
                   whileHover={{ y: -3 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Github size={18} />
-                </motion.button>
-                <motion.button
-                  onClick={() => window.open(project.demo, "_blank")}
+                </motion.a>
+                <motion.a
+                  href={project.demo}
+                  onClick={(e) => handleDemoClick(project.demo, e)}
                   className="w-10 h-10 rounded-full bg-muted/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all cursor-pointer"
                   whileHover={{ y: -3 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <ExternalLink size={18} />
-                </motion.button>
+                </motion.a>
               </div>
             </AnimatedCard>
           ))}
