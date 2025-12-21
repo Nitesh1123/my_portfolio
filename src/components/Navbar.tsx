@@ -90,7 +90,7 @@ export const Navbar = () => {
 
             {/* Resume Button */}
             <motion.a
-              href="./CV.pdf"
+              href="https://nitesh1123.github.io/my_portfolio/CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
@@ -155,7 +155,7 @@ export const Navbar = () => {
                 className="mt-4 pt-3 border-t border-border/20"
               >
                 <a
-                  href="./CV.pdf"
+                  href="https://nitesh1123.github.io/my_portfolio/CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full block text-center py-3 px-4 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
