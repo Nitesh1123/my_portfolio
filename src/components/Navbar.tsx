@@ -62,7 +62,8 @@ export const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            NK.
+            NK
+            <br />
           </motion.a>
 
           {/* Desktop Nav Links */}
