@@ -155,7 +155,7 @@ export const Navbar = () => {
                 className="mt-4 pt-3 border-t border-border/20"
               >
                 <a
-                  href="/CV.pdf"
+                  href="CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full block text-center py-3 px-4 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
