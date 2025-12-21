@@ -6,23 +6,42 @@ import { AnimatedCard } from "@/components/animations/AnimatedCard";
 const skillCategories = [
   {
     icon: Code2,
-    title: "Programming Languages",
-    skills: ["Python", "JavaScript", "SQL"],
+    title: "Languages & Core",
+    skills: [
+      { name: "Python", level: "Expert" },
+      { name: "SQL", level: "Advanced" },
+      { name: "JavaScript", level: "Intermediate" },
+    ],
   },
   {
     icon: Brain,
-    title: "Machine Learning & AI",
-    skills: ["TensorFlow", "ML Algorithms", "Neural Networks"],
+    title: "Machine Learning",
+    skills: [
+      { name: "TensorFlow/Keras", level: "Advanced" },
+      { name: "ML Algorithms", level: "Advanced" },
+      { name: "Neural Networks", level: "Intermediate" },
+      { name: "Data Preprocessing", level: "Advanced" },
+    ],
   },
   {
     icon: BarChart3,
-    title: "Data Analytics",
-    skills: ["Power BI", "Data Visualization", "Data Analysis"],
+    title: "Data & Analytics",
+    skills: [
+      { name: "Pandas/NumPy", level: "Advanced" },
+      { name: "Data Visualization", level: "Advanced" },
+      { name: "Statistical Analysis", level: "Intermediate" },
+      { name: "Power BI", level: "Intermediate" },
+    ],
   },
   {
     icon: Globe,
-    title: "Web Technologies",
-    skills: ["React", "Node.js", "MongoDB", "Express"],
+    title: "Web & Backend",
+    skills: [
+      { name: "React", level: "Intermediate" },
+      { name: "Node.js/Express", level: "Intermediate" },
+      { name: "MongoDB", level: "Intermediate" },
+      { name: "REST APIs", level: "Intermediate" },
+    ],
   },
 ];
 
