@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Code2, Brain, BarChart3, Globe } from "lucide-react";
 import { FadeInLeft } from "@/components/animations/MotionWrapper";
 import { AnimatedCard } from "@/components/animations/AnimatedCard";
+import { SkillRing } from "@/components/animations/SkillRing";
 
 const skillCategories = [
   {
@@ -80,11 +81,21 @@ export const SkillsSection = () => {
               {/* Skills */}
               <div className="flex flex-col gap-3">
                 {category.skills.map((skill, skillIndex) => {
-                  const skillItem = typeof skill === "string" ? { name: skill, level: "Proficient" } : skill;
-                  const levelColor =
-                    skillItem.level === "Expert" ? "text-primary" :
-                    skillItem.level === "Advanced" ? "text-secondary" :
-                    "text-accent";
+                  const skillItem = typeof skill === "string" ? { name: skill, level: "Intermediate" } : skill;
+                  
+                  let levelColor = "hsl(var(--accent))"; // #A855F7
+                  let percentage = 40;
+                  
+                  if (skillItem.level === "Expert") {
+                    levelColor = "hsl(var(--primary))"; // #4ADE80
+                    percentage = 90;
+                  } else if (skillItem.level === "Advanced") {
+                    levelColor = "hsl(var(--primary))"; // Advanced acts like Expert/High-tier
+                    percentage = 80;
+                  } else if (skillItem.level === "Intermediate") {
+                    levelColor = "hsl(var(--secondary))"; // #38BDF8
+                    percentage = 65;
+                  }
 
                   return (
                     <motion.div
@@ -99,7 +110,10 @@ export const SkillsSection = () => {
                         <span className="w-2 h-2 rounded-full bg-primary" />
                         <span className="text-muted-foreground font-medium text-sm">{skillItem.name}</span>
                       </div>
-                      <span className={`text-xs font-semibold ${levelColor}`}>{skillItem.level}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-semibold text-muted-foreground/50">{skillItem.level}</span>
+                        <SkillRing percentage={percentage} color={levelColor} size={28} strokeWidth={3} />
+                      </div>
                     </motion.div>
                   );
                 })}

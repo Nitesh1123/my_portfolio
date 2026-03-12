@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTypingEffect } from "@/hooks/useTypingEffect";
+import { NeuralNetworkBackground } from "@/components/animations/NeuralNetworkBackground";
+import { TerminalStatCard } from "@/components/animations/TerminalStatCard";
+import { TopTicker } from "@/components/animations/TopTicker";
 
 export const HeroSection = () => {
   const typingText = useTypingEffect();
@@ -20,25 +23,13 @@ export const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center relative pt-20 overflow-hidden">
-      {/* Background Glow Effect */}
-      <motion.div
-        className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-60 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, hsl(199 89% 58% / 0.15) 0%, transparent 70%)",
-          filter: "blur(80px)",
-        }}
-        animate={{
-          x: [0, -50, 0],
-          y: [0, -50, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
+    <section className="min-h-screen flex items-center relative pt-32 pb-10 overflow-hidden">
+      {/* Neural Network Interactive Background */}
+      <NeuralNetworkBackground />
+
+      <div className="absolute top-[80px] left-0 w-full z-40">
+        <TopTicker />
+      </div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-3xl">
@@ -64,7 +55,7 @@ export const HeroSection = () => {
 
           {/* Typing Effect */}
           <motion.div
-            className="text-2xl md:text-4xl font-bold mb-6 min-h-[3rem] md:min-h-[3.5rem] flex items-center"
+            className="text-3xl md:text-4xl font-bold mb-6 min-h-[3rem] md:min-h-[3.5rem] flex items-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -91,22 +82,34 @@ export const HeroSection = () => {
 
           {/* Key Metrics */}
           <motion.div
-            className="flex flex-wrap gap-8 mb-10"
+            className="flex flex-nowrap md:flex-wrap gap-4 md:gap-6 mb-10 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55 }}
           >
-            <div className="flex flex-col">
-              <span className="text-2xl md:text-3xl font-bold text-primary">5+</span>
-              <span className="text-sm text-muted-foreground">ML Projects</span>
+            <div className="snap-center shrink-0 min-w-[75vw] md:min-w-0">
+              <TerminalStatCard
+                finalText="5+"
+                label="ML Projects"
+                colorClass="text-primary"
+                delayMs={600}
+              />
             </div>
-            <div className="flex flex-col">
-              <span className="text-2xl md:text-3xl font-bold text-secondary">Python</span>
-              <span className="text-sm text-muted-foreground">Expert Level</span>
+            <div className="snap-center shrink-0 min-w-[75vw] md:min-w-0">
+              <TerminalStatCard
+                finalText="Python"
+                label="Expert Level"
+                colorClass="text-secondary"
+                delayMs={800}
+              />
             </div>
-            <div className="flex flex-col">
-              <span className="text-2xl md:text-3xl font-bold text-accent">DS & ML</span>
-              <span className="text-sm text-muted-foreground">Core Focus</span>
+            <div className="snap-center shrink-0 min-w-[75vw] md:min-w-0">
+              <TerminalStatCard
+                finalText="DS & ML"
+                label="Core Focus"
+                colorClass="text-accent"
+                delayMs={1000}
+              />
             </div>
           </motion.div>
 

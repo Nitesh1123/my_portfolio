@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
   { href: "#skills", label: "Skills" },
+  { href: "#achievements", label: "Achievements" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -13,12 +14,15 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  
+  // Progress Bar for reading
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      const sections = ["about", "projects", "skills", "contact"];
+      const sections = ["about", "projects", "skills", "achievements", "contact"];
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
         if (element && window.scrollY >= element.offsetTop - 200) {
@@ -53,6 +57,17 @@ export const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
+      {/* Reading Progress Bar */}
+      <motion.div
+        className="absolute top-0 left-0 h-1 w-full z-50"
+        style={{
+          scaleX: scrollYProgress,
+          transformOrigin: "0%",
+          background: "linear-gradient(90deg, #4ADE80, #38BDF8, #A855F7)",
+          boxShadow: "0 0 10px #4ADE80"
+        }}
+      />
+
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -78,11 +93,22 @@ export const Navbar = () => {
                 >
                   <button
                     onClick={() => handleNavClick(link.href)}
-                    className={`text-muted-foreground hover:text-foreground font-medium text-sm py-2 nav-link-underline transition-colors ${
-                      activeSection === link.href.substring(1) ? "text-foreground active" : ""
+                    className={`relative text-muted-foreground hover:text-foreground font-medium text-sm py-2 transition-colors ${
+                      activeSection === link.href.substring(1) ? "text-primary font-bold" : ""
                     }`}
                   >
                     {link.label}
+                    {/* Active Glow Underline */}
+                    {activeSection === link.href.substring(1) && (
+                      <motion.div
+                        layoutId="nav-glow"
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                        style={{ boxShadow: "0 0 8px hsl(var(--primary))" }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    )}
                   </button>
                 </motion.li>
               ))}

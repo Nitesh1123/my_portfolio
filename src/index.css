@@ -200,4 +200,25 @@
   .animation-delay-600 {
     animation-delay: 600ms;
   }
+  
+  @keyframes ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-ticker {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+  }
+}
+
+/* Hide native cursor exclusively on desktop devices */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
 }

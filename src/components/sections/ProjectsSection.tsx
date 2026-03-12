@@ -1,29 +1,41 @@
 import { motion } from "framer-motion";
-import { ShoppingCart, Bot, HardDrive, Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, ShieldAlert, MessageSquare } from "lucide-react";
 import { FadeInLeft } from "@/components/animations/MotionWrapper";
 import { AnimatedCard } from "@/components/animations/AnimatedCard";
+import { LiveDemoWidget } from "@/components/animations/LiveDemoWidget";
+import { AnimatedBadge } from "@/components/animations/AnimatedBadge";
+import { MiniBarChart } from "@/components/animations/MiniBarChart";
 
 const projects = [
   {
-    icon: ShoppingCart,
-    title: "AI-Powered E-commerce",
+    iconComponent: (
+      <div className="p-3 bg-primary/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--primary)_/_0.3)]">
+        <ShieldAlert size={36} className="text-primary" />
+      </div>
+    ),
+    title: "Intrusion Detection System",
     description:
-      "A full-stack fashion e-commerce platform featuring personalized product recommendations powered by TensorFlow and Python. Built with MERN stack for scalable backend architecture and seamless user experience.",
-    technologies: ["Python", "TensorFlow", "MERN", "ML"],
-    github: "#",
+      "A machine learning-based IDS using Random Forest to classify network traffic as normal or anomalous, trained on the NSL-KDD dataset. Features data preprocessing, EDA, and a Streamlit web app for interactive predictions.",
+    technologies: ["Python", "Scikit-Learn", "Pandas", "Streamlit", "Matplotlib"],
+    github: "https://github.com/Nitesh1123/Enhancing-Intrusion-Detection-Systems-Project",
+    demo: "#",
+    badgeComponent: <AnimatedBadge targetNumber={99.76} suffix="% Accuracy" />,
+  },
+  {
+    iconComponent: (
+      <div className="p-3 bg-accent/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--accent)_/_0.3)]">
+        <MessageSquare size={36} className="text-accent" />
+      </div>
+    ),
+    title: "Real-Time Chat Application",
+    description:
+      "A secure real-time chat app with user authentication, role-based access, one-to-one and group messaging via WebSockets, with online status, typing indicators, and message timestamps.",
+    technologies: ["React", "Node.js", "Express.js", "MongoDB", "WebSockets"],
+    github: "https://github.com/Nitesh1123/ChatApplication",
     demo: "#",
   },
   {
-    icon: Bot,
-    title: "Butler / Sarcastic Chatbot",
-    description:
-      "An intelligent chatbot with a witty personality built using Google's Gemini API. Developed with TypeScript for type safety and modern JavaScript practices, delivering humorous and engaging conversational experiences.",
-    technologies: ["TypeScript", "Gemini API", "AI", "Node.js"],
-    github: "#",
-    demo: "#",
-  },
-  {
-    icon: HardDrive,
+    iconComponent: <MiniBarChart />,
     title: "Disk Scheduling Simulator",
     description:
       "An interactive web-based simulator for visualizing operating system disk scheduling algorithms including FCFS, SCAN, C-SCAN, and more. Features real-time algorithm visualization and performance metrics.",
@@ -65,21 +77,36 @@ export const ProjectsSection = () => {
           </h2>
         </FadeInLeft>
 
+        {/* Live Demo Widget */}
+        <LiveDemoWidget />
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <AnimatedCard
               key={project.title}
               index={index}
               hoverEffect="glow"
-              className="glass rounded-2xl p-6 card-hover group"
+              className="glass rounded-2xl p-6 card-hover group relative"
             >
-              {/* Icon */}
+              {/* Badge */}
+              {(project as any).badge && (
+                <div className="absolute top-6 right-6 bg-primary/10 text-primary border border-primary/30 px-3 py-1 rounded-full text-xs font-bold drop-shadow-[0_0_10px_hsl(var(--primary)_/_0.5)] z-20">
+                  {(project as any).badge}
+                </div>
+              )}
+              {(project as any).badgeComponent && (
+                <div className="absolute top-6 right-6 z-20">
+                  {(project as any).badgeComponent}
+                </div>
+              )}
+
+              {/* Icon / Visualization */}
               <motion.div
-                className="text-primary text-4xl mb-6"
-                whileHover={{ scale: 1.1, rotate: 5 }}
+                className="mb-8"
+                whileHover={{ scale: 1.05, y: -2 }}
                 transition={{ duration: 0.2 }}
               >
-                <project.icon size={40} />
+                {project.iconComponent}
               </motion.div>
 
               {/* Title */}

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { MapPin } from "lucide-react";
+import { MapPin, Brain, Code2, Rocket } from "lucide-react";
 import { FadeInUp, FadeInLeft } from "@/components/animations/MotionWrapper";
+import { Timeline } from "@/components/animations/Timeline";
 
 export const AboutSection = () => {
   return (
@@ -20,37 +21,73 @@ export const AboutSection = () => {
           </h2>
         </FadeInLeft>
 
-        <div className="max-w-4xl">
-          <FadeInUp delay={0.1}>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              I'm a data-driven engineer focused on building{" "}
-              <span className="text-primary font-semibold">machine learning systems</span> that create measurable impact.
-              As a B.Tech Computer Science student at Lovely Professional University (3rd Year), I combine strong fundamentals in algorithms and data structures with practical experience in ML engineering.
-            </p>
-          </FadeInUp>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Column: Timeline */}
+          <div className="md:col-span-5 hidden md:block">
+            <Timeline />
+          </div>
 
-          <FadeInUp delay={0.2}>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              <span className="text-primary font-semibold">Technical Expertise:</span> I specialize in Python for ML, deep learning with TensorFlow, data processing & analysis, and building scalable systems. I've developed multiple end-to-end ML projects including predictive models, visualization dashboards, and web applications with React + Node.js.
-            </p>
-          </FadeInUp>
+          {/* Right Column: Text Content */}
+          <div className="md:col-span-7 space-y-8">
+            {/* Mobile Timeline (Shows on small screens only) */}
+            <div className="md:hidden mb-12">
+               <Timeline />
+            </div>
 
-          <FadeInUp delay={0.25}>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              <span className="text-primary font-semibold">What I Value:</span> I'm passionate about solving real-world problems with data, writing clean and maintainable code, continuous learning, and collaborating with teams to deliver production-ready solutions.
-            </p>
-          </FadeInUp>
+            <FadeInUp delay={0.1}>
+              <div className="glass p-6 rounded-2xl border border-primary/20 hover:border-primary/50 transition-colors">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                    <Rocket size={20} />
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground">Mission & Impact</h3>
+                </div>
+                <p className="text-muted-foreground leading-relaxed">
+                  I'm a data-driven engineer focused on building <span className="text-primary font-semibold">machine learning systems</span> that create measurable impact. Currently in my 3rd Year of B.Tech CS at LPU, I bridge the gap between theoretical algorithms and scalable production pipelines.
+                </p>
+              </div>
+            </FadeInUp>
 
-          <FadeInUp delay={0.3}>
-            <motion.div
-              className="flex items-center gap-3 text-muted-foreground"
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.2 }}
-            >
-              <MapPin className="text-secondary" size={20} />
-              <span>Based in Nalagarh, India • Open to opportunities</span>
-            </motion.div>
-          </FadeInUp>
+            <FadeInUp delay={0.2}>
+              <div className="glass p-6 rounded-2xl border border-secondary/20 hover:border-secondary/50 transition-colors">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 rounded-lg bg-secondary/10 text-secondary">
+                    <Brain size={20} />
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground">Technical Approach</h3>
+                </div>
+                <p className="text-muted-foreground leading-relaxed">
+                  My workflow primarily relies on Python and TensorFlow for deep learning, paired with modern web stacks (MERN/React) to deliver end-to-end applications. Visualizing complex data and extracting actionable insights is my core strength.
+                </p>
+              </div>
+            </FadeInUp>
+
+            <FadeInUp delay={0.3}>
+              <div className="glass p-6 rounded-2xl border border-accent/20 hover:border-accent/50 transition-colors">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 rounded-lg bg-accent/10 text-accent">
+                    <Code2 size={20} />
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground">Core Values</h3>
+                </div>
+                <p className="text-muted-foreground leading-relaxed">
+                  Clean architecture, continuous iteration, and solving real-world problems. Whether writing API endpoints or tuning ML hyperparameters, I prioritize maintainable code and collaborative environments.
+                </p>
+              </div>
+            </FadeInUp>
+
+            <FadeInUp delay={0.4}>
+              <motion.div
+                className="inline-flex items-center gap-3 text-muted-foreground px-4 py-2 rounded-full border border-border/50 bg-background/50 backdrop-blur-sm"
+                whileHover={{ x: 5, backgroundColor: "hsl(var(--secondary) / 0.1)" }}
+                transition={{ duration: 0.2 }}
+              >
+                <MapPin className="text-secondary" size={18} />
+                <span className="text-sm font-medium">Based in Nalagarh, India • Open to opportunities</span>
+              </motion.div>
+            </FadeInUp>
+          </div>
         </div>
       </div>
     </section>
