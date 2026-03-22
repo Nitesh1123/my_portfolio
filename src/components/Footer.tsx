@@ -19,7 +19,7 @@ export const Footer = () => {
         <a href="https://www.linkedin.com/in/nitesh-chandel/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:shadow-[0_0_15px_rgba(74,222,128,0.4)] transition-all duration-300 group">
           <Linkedin size={18} className="group-hover:scale-110 transition-transform" />
         </a>
-        <a href="mailto:knitesh1123@gmail.com" className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:shadow-[0_0_15px_rgba(74,222,128,0.4)] transition-all duration-300 group">
+        <a href="mailto:knitesh1123@gmail.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:shadow-[0_0_15px_rgba(74,222,128,0.4)] transition-all duration-300 group">
           <Mail size={18} className="group-hover:scale-110 transition-transform" />
         </a>
       </div>

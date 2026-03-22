@@ -1,32 +1,23 @@
 import { motion } from "framer-motion";
-import { Star, Flame, CheckCircle2 } from "lucide-react";
+import { Code2, Star } from "lucide-react";
 import { FadeInLeft, FadeInUp } from "@/components/animations/MotionWrapper";
-import { AnimatedBadge } from "@/components/animations/AnimatedBadge";
 
 const achievements = [
   {
+    icon: <Code2 size={24} className="text-primary" />,
+    iconBg: "bg-primary/10",
+    title: "100+ Problems Solved",
+    value: "100+",
+    description: "on LeetCode, HackerRank, and GeeksforGeeks.",
+    glowColor: "hsl(var(--primary))",
+  },
+  {
     icon: <Star size={24} className="text-[#F59E0B]" />,
     iconBg: "bg-[#F59E0B]/10",
-    title: "HackerRank Java",
+    title: "4-Star Java Rating",
     value: "4 Star",
-    description: "Achieved persistent 4-star rating in Java problem solving.",
-    glowColor: "var(--color-yellow-500)", // Using standard tailwind yellow
-  },
-  {
-    icon: <Flame size={24} className="text-[#F97316]" />,
-    iconBg: "bg-[#F97316]/10",
-    title: "LeetCode Peak Rating",
-    value: "1495",
-    description: "Consistent participant in weekly and biweekly contests.",
-    glowColor: "var(--color-orange-500)", // Using standard tailwind orange
-  },
-  {
-    icon: <CheckCircle2 size={24} className="text-primary" />,
-    iconBg: "bg-primary/10",
-    title: "DSA Problems Solved",
-    valueComponent: <AnimatedBadge targetNumber={90} suffix="+" />,
-    description: "Mastered fundamental concepts in arrays, trees, and dynamic programming.",
-    glowColor: "hsl(var(--primary))",
+    description: "on HackerRank.",
+    glowColor: "var(--color-yellow-500)",
   },
 ];
 
@@ -84,13 +75,9 @@ export const AchievementsSection = () => {
 
                 {/* Value/Badge */}
                 <div className="mt-4 md:mt-0 md:ml-auto">
-                  {item.valueComponent ? (
-                    item.valueComponent
-                  ) : (
-                    <span className="text-2xl font-bold text-foreground font-mono tracking-tight bg-background/50 px-4 py-2 rounded-xl border border-border/50 inline-block">
-                      {item.value}
-                    </span>
-                  )}
+                  <span className="text-2xl font-bold text-foreground font-mono tracking-tight bg-background/50 px-4 py-2 rounded-xl border border-border/50 inline-block">
+                    {item.value}
+                  </span>
                 </div>
               </motion.div>
             </FadeInUp>

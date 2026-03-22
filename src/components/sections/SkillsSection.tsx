@@ -1,50 +1,132 @@
 import { motion } from "framer-motion";
-import { Code2, Brain, BarChart3, Globe } from "lucide-react";
+import {
+  FileCode,
+  Braces,
+  Coffee,
+  Cpu,
+  Atom,
+  Server,
+  Palette,
+  Layout,
+  FlaskConical,
+  Code,
+  Table,
+  BrainCircuit,
+  BarChart3,
+  AppWindow,
+  Search,
+  Bot,
+  GitBranch,
+  Database,
+  Server as MongoIcon,
+  PieChart,
+  Code2,
+  FileSpreadsheet,
+} from "lucide-react";
 import { FadeInLeft } from "@/components/animations/MotionWrapper";
-import { AnimatedCard } from "@/components/animations/AnimatedCard";
-import { SkillRing } from "@/components/animations/SkillRing";
 
-const skillCategories = [
+// 3 out of 5 = 3 filled, 2 empty
+// 2 out of 5 = 2 filled, 3 empty
+// 4 out of 5 = 4 filled, 1 empty
+
+const skillGroups = [
   {
-    icon: Code2,
-    title: "Languages & Core",
+    category: "Languages",
     skills: [
-      { name: "Python", level: "Expert" },
-      { name: "SQL", level: "Advanced" },
-      { name: "JavaScript", level: "Intermediate" },
+      { name: "Python", rating: 3, icon: FileCode },
+      { name: "JavaScript", rating: 3, icon: Braces },
+      { name: "Java", rating: 3, icon: Coffee },
+      { name: "C/C++", rating: 2, icon: Cpu },
     ],
   },
   {
-    icon: Brain,
-    title: "Machine Learning",
+    category: "Web & Frameworks",
     skills: [
-      { name: "TensorFlow/Keras", level: "Advanced" },
-      { name: "ML Algorithms", level: "Advanced" },
-      { name: "Neural Networks", level: "Intermediate" },
-      { name: "Data Preprocessing", level: "Advanced" },
+      { name: "React.js", rating: 3, icon: Atom },
+      { name: "Node.js", rating: 2, icon: Server },
+      { name: "Tailwind", rating: 3, icon: Palette },
+      { name: "HTML/CSS", rating: 3, icon: Layout },
+      { name: "Flask", rating: 2, icon: FlaskConical },
+      { name: "PHP", rating: 2, icon: Code },
     ],
   },
   {
-    icon: BarChart3,
-    title: "Data & Analytics",
+    category: "Data Science & ML",
     skills: [
-      { name: "Pandas/NumPy", level: "Advanced" },
-      { name: "Data Visualization", level: "Advanced" },
-      { name: "Statistical Analysis", level: "Intermediate" },
-      { name: "Power BI", level: "Intermediate" },
+      { name: "Pandas", rating: 3, icon: Table },
+      { name: "Scikit-Learn", rating: 3, icon: BrainCircuit },
+      { name: "Matplotlib", rating: 3, icon: BarChart3 },
+      { name: "Streamlit", rating: 2, icon: AppWindow },
+      { name: "EDA", rating: 3, icon: Search },
+      { name: "ML Models", rating: 3, icon: Bot },
     ],
   },
   {
-    icon: Globe,
-    title: "Web & Backend",
+    category: "Tools",
     skills: [
-      { name: "React", level: "Intermediate" },
-      { name: "Node.js/Express", level: "Intermediate" },
-      { name: "MongoDB", level: "Intermediate" },
-      { name: "REST APIs", level: "Intermediate" },
+      { name: "Git/GitHub", rating: 3, icon: GitBranch },
+      { name: "MySQL", rating: 3, icon: Database },
+      { name: "MongoDB", rating: 2, icon: MongoIcon },
+      { name: "Power BI", rating: 2, icon: PieChart },
+      { name: "VS Code", rating: 4, icon: Code2 },
+      { name: "Excel", rating: 2, icon: FileSpreadsheet },
     ],
   },
 ];
+
+const DotRating = ({ rating }: { rating: number }) => {
+  return (
+    <div className="flex items-center gap-[3px]">
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className={`w-[5px] h-[5px] rounded-full transition-all duration-300 ${
+            i < rating
+              ? "bg-[#4ADE80] shadow-[0_0_4px_rgba(74,222,128,0.8)]"
+              : "bg-border/30"
+          }`}
+        />
+      ))}
+    </div>
+  );
+};
+
+const SkillPill = ({
+  skill,
+  index,
+  groupIndex,
+}: {
+  skill: (typeof skillGroups)[0]["skills"][0];
+  index: number;
+  groupIndex: number;
+}) => {
+  const Icon = skill.icon;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{
+        delay: groupIndex * 0.1 + index * 0.03,
+        duration: 0.4,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      }}
+      whileHover={{
+        scale: 1.05,
+        borderColor: "rgba(74, 222, 128, 0.4)",
+        boxShadow: "0 0 20px rgba(74, 222, 128, 0.15)",
+      }}
+      className="flex items-center gap-2 px-3 py-2 rounded-lg glass border border-border/20 bg-background/40 cursor-default"
+    >
+      <Icon size={14} className="text-[#4ADE80]/80" />
+      <span className="text-xs font-medium text-foreground/90 whitespace-nowrap">
+        {skill.name}
+      </span>
+      <DotRating rating={skill.rating} />
+    </motion.div>
+  );
+};
 
 export const SkillsSection = () => {
   return (
@@ -52,7 +134,8 @@ export const SkillsSection = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "linear-gradient(180deg, transparent 0%, hsl(0 0% 10% / 0.3) 100%)",
+          background:
+            "linear-gradient(180deg, transparent 0%, hsl(0 0% 10% / 0.3) 100%)",
         }}
       />
 
@@ -64,63 +147,62 @@ export const SkillsSection = () => {
           </h2>
         </FadeInLeft>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((category, index) => (
-            <AnimatedCard
-              key={category.title}
-              index={index}
-              hoverEffect="lift"
-              className="glass rounded-2xl p-6 skill-card-hover"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skillGroups.map((group, groupIndex) => (
+            <motion.div
+              key={group.category}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: groupIndex * 0.15, duration: 0.5 }}
+              className="space-y-4"
             >
-              {/* Category Title */}
-              <div className="flex items-center gap-3 mb-6">
-                <category.icon className="text-secondary" size={24} />
-                <h3 className="text-lg font-bold text-foreground">{category.title}</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground/60 mb-4">
+                {group.category}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {group.skills.map((skill, index) => (
+                  <SkillPill
+                    key={skill.name}
+                    skill={skill}
+                    index={index}
+                    groupIndex={groupIndex}
+                  />
+                ))}
               </div>
-
-              {/* Skills */}
-              <div className="flex flex-col gap-3">
-                {category.skills.map((skill, skillIndex) => {
-                  const skillItem = typeof skill === "string" ? { name: skill, level: "Intermediate" } : skill;
-                  
-                  let levelColor = "hsl(var(--accent))"; // #A855F7
-                  let percentage = 40;
-                  
-                  if (skillItem.level === "Expert") {
-                    levelColor = "hsl(var(--primary))"; // #4ADE80
-                    percentage = 90;
-                  } else if (skillItem.level === "Advanced") {
-                    levelColor = "hsl(var(--primary))"; // Advanced acts like Expert/High-tier
-                    percentage = 80;
-                  } else if (skillItem.level === "Intermediate") {
-                    levelColor = "hsl(var(--secondary))"; // #38BDF8
-                    percentage = 65;
-                  }
-
-                  return (
-                    <motion.div
-                      key={skillItem.name}
-                      className="flex items-center justify-between px-3 py-2 rounded-xl bg-muted/30 border border-border/30 transition-all hover:bg-primary/10 hover:border-primary/30"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + skillIndex * 0.05 + 0.3 }}
-                    >
-                      <div className="flex items-center gap-3">
-                        <span className="w-2 h-2 rounded-full bg-primary" />
-                        <span className="text-muted-foreground font-medium text-sm">{skillItem.name}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-semibold text-muted-foreground/50">{skillItem.level}</span>
-                        <SkillRing percentage={percentage} color={levelColor} size={28} strokeWidth={3} />
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </AnimatedCard>
+            </motion.div>
           ))}
         </div>
+
+        {/* Legend */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="mt-12 flex items-center justify-center gap-6 text-xs text-muted-foreground/50"
+        >
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-[2px]">
+              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
+              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
+              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
+              <div className="w-[4px] h-[4px] rounded-full bg-border/30" />
+              <div className="w-[4px] h-[4px] rounded-full bg-border/30" />
+            </div>
+            <span>Familiar</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-[2px]">
+              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
+              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
+              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
+              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
+              <div className="w-[4px] h-[4px] rounded-full bg-border/30" />
+            </div>
+            <span>Proficient</span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

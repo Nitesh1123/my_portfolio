@@ -44,7 +44,7 @@ export const AboutSection = () => {
                   <h3 className="text-xl font-bold text-foreground">Mission & Impact</h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  I'm a data-driven engineer focused on building <span className="text-primary font-semibold">machine learning systems</span> that create measurable impact. Currently in my 3rd Year of B.Tech CS at LPU, I bridge the gap between theoretical algorithms and scalable production pipelines.
+                  B.Tech CSE student at Lovely Professional University (CGPA: 8.19), passionate about Machine Learning, Data Science, and Full-Stack Development. I build systems that turn complex data into measurable real-world impact.
                 </p>
               </div>
             </FadeInUp>
@@ -58,7 +58,7 @@ export const AboutSection = () => {
                   <h3 className="text-xl font-bold text-foreground">Technical Approach</h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  My workflow primarily relies on Python and TensorFlow for deep learning, paired with modern web stacks (MERN/React) to deliver end-to-end applications. Visualizing complex data and extracting actionable insights is my core strength.
+                  Trained in ML at CipherSchools covering Regression, Decision Trees, Random Forest, SVM, K-Means, PCA, NLP, and CNNs. Skilled in Python, React, Node.js, and ML frameworks for end-to-end development.
                 </p>
               </div>
             </FadeInUp>
@@ -72,7 +72,7 @@ export const AboutSection = () => {
                   <h3 className="text-xl font-bold text-foreground">Core Values</h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Clean architecture, continuous iteration, and solving real-world problems. Whether writing API endpoints or tuning ML hyperparameters, I prioritize maintainable code and collaborative environments.
+                  Passionate about building ML-powered solutions and full-stack applications. Focused on clean architecture, continuous learning, and turning complex data into actionable insights through collaborative development.
                 </p>
               </div>
             </FadeInUp>
