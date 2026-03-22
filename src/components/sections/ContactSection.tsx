@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MapPin, Phone, Github, Linkedin, Send, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
 import { FadeInLeft } from "@/components/animations/MotionWrapper";
 import { AnimatedCard } from "@/components/animations/AnimatedCard";
 
@@ -31,37 +30,6 @@ const socialLinks = [
 ];
 
 export const ContactSection = () => {
-  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormStatus("submitting");
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch("https://formspree.io/f/your_formspree_endpoint", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json",
-        },
-      });
-      
-      if (response.ok) {
-        setFormStatus("success");
-        form.reset();
-        // Reset success message after 5 seconds
-        setTimeout(() => setFormStatus("idle"), 5000);
-      } else {
-        setFormStatus("error");
-      }
-    } catch (error) {
-      setFormStatus("error");
-    }
-  };
-
   return (
     <section id="contact" className="py-24 relative">
       <div
@@ -93,94 +61,27 @@ export const ContactSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-10 items-start">
             
-            {/* Contact Form */}
+            {/* CTA Card - Let's Connect */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="glass rounded-2xl p-8 relative overflow-hidden"
+              className="glass rounded-2xl p-8 relative overflow-hidden flex flex-col items-center text-center"
             >
-              <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5 relative z-10 w-full">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="name" className="text-sm font-medium text-foreground">Name</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    name="name" 
-                    required 
-                    className="bg-background/50 border border-border/50 rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all w-full"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="email" className="text-sm font-medium text-foreground">Email</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    required 
-                    className="bg-background/50 border border-border/50 rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all w-full"
-                    placeholder="john@example.com"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="message" className="text-sm font-medium text-foreground">Message</label>
-                  <textarea 
-                    id="message" 
-                    name="message" 
-                    required 
-                    rows={4}
-                    className="bg-background/50 border border-border/50 rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all resize-none w-full"
-                    placeholder="How can I help you?"
-                  ></textarea>
-                </div>
-                
-                <button
-                  type="submit"
-                  disabled={formStatus === "submitting"}
-                  className="btn-gradient px-8 py-3.5 mt-2 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed text-primary-foreground font-semibold"
-                >
-                  <AnimatePresence mode="wait">
-                    {formStatus === "success" ? (
-                      <motion.div
-                        key="success"
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.5 }}
-                        className="flex items-center gap-2"
-                      >
-                        <CheckCircle size={18} />
-                        Message Sent
-                      </motion.div>
-                    ) : formStatus === "submitting" ? (
-                      <motion.div
-                        key="submitting"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                      >
-                        Sending...
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="idle"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="flex items-center gap-2"
-                      >
-                        Send Message
-                        <Send size={18} />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </button>
-                {formStatus === "error" && (
-                  <p className="text-red-500 text-sm mt-2 text-center">Something went wrong. Please try again.</p>
-                )}
-              </form>
+              <h3 className="text-3xl font-bold mb-4">Let's Connect</h3>
+              <p className="text-muted-foreground text-base leading-relaxed mb-8 max-w-sm">
+                Feel free to reach out via email or any platform below.
+              </p>
+              <motion.a
+                href="mailto:knitesh1123@gmail.com"
+                className="px-8 py-4 bg-[#4ADE80] text-background font-bold rounded-xl shadow-[0_0_20px_rgba(74,222,128,0.4)] hover:shadow-[0_0_30px_rgba(74,222,128,0.6)] transition-all duration-300 flex items-center gap-3"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Mail size={20} />
+                Send me an Email
+              </motion.a>
             </motion.div>
 
             {/* Contact Info & Info Cards */}
