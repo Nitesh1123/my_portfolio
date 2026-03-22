@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MapPin, Github, Linkedin, Twitter, Send, CheckCircle } from "lucide-react";
+import { Mail, MapPin, Phone, Github, Linkedin, Send, CheckCircle } from "lucide-react";
 import { FadeInLeft } from "@/components/animations/MotionWrapper";
 import { AnimatedCard } from "@/components/animations/AnimatedCard";
 
@@ -17,12 +17,17 @@ const contactInfo = [
     value: "Nalagarh, India",
     href: null,
   },
+  {
+    icon: Phone,
+    label: "Mobile",
+    value: "+91-7876413487",
+    href: "tel:+91-7876413487",
+  },
 ];
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/Nitesh1123", label: "GitHub" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/nitesh-chandel/", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
 ];
 
 export const ContactSection = () => {

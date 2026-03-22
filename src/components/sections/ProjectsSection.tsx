@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, ExternalLink, ShieldAlert, MessageSquare } from "lucide-react";
+import { Github, ExternalLink, ShieldAlert, BrainCircuit, MessageCircle } from "lucide-react";
 import { FadeInLeft } from "@/components/animations/MotionWrapper";
 import { AnimatedCard } from "@/components/animations/AnimatedCard";
 import { LiveDemoWidget } from "@/components/animations/LiveDemoWidget";
@@ -15,24 +15,37 @@ const projects = [
     ),
     title: "Intrusion Detection System",
     description:
-      "A machine learning-based IDS using Random Forest to classify network traffic as normal or anomalous, trained on the NSL-KDD dataset. Features data preprocessing, EDA, and a Streamlit web app for interactive predictions.",
-    technologies: ["Python", "Scikit-Learn", "Pandas", "Streamlit", "Matplotlib"],
+      "Developed an ML-powered IDS to detect and classify malicious network traffic using the NSL-KDD benchmark dataset. Achieved 99.76% classification accuracy using a fine-tuned Random Forest model.",
+    technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Streamlit", "Scikit-Learn"],
     github: "https://github.com/Nitesh1123/Enhancing-Intrusion-Detection-Systems-Project",
-    demo: "#",
+    demo: "https://niju7410-ids-intrusion-detection.hf.space/",
     badgeComponent: <AnimatedBadge targetNumber={99.76} suffix="% Accuracy" />,
   },
   {
     iconComponent: (
       <div className="p-3 bg-accent/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--accent)_/_0.3)]">
-        <MessageSquare size={36} className="text-accent" />
+        <BrainCircuit size={36} className="text-accent" />
+      </div>
+    ),
+    title: "Machine Learning Model",
+    description:
+      "Implemented and compared Logistic Regression and Random Forest for binary and multi-class classification. Evaluated using accuracy, precision, recall, and F1-score metrics.",
+    technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Streamlit", "Scikit-Learn"],
+    github: "https://github.com/Nitesh1123",
+    demo: "#",
+  },
+  {
+    iconComponent: (
+      <div className="p-3 bg-secondary/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--secondary)_/_0.3)]">
+        <MessageCircle size={36} className="text-secondary" />
       </div>
     ),
     title: "Real-Time Chat Application",
     description:
-      "A secure real-time chat app with user authentication, role-based access, one-to-one and group messaging via WebSockets, with online status, typing indicators, and message timestamps.",
+      "Engineered a secure real-time chat platform with JWT authentication, role-based access, one-to-one and group messaging via WebSockets, with typing indicators and online presence.",
     technologies: ["React", "Node.js", "Express.js", "MongoDB", "WebSockets"],
     github: "https://github.com/Nitesh1123/ChatApplication",
-    demo: "#",
+    demo: "https://chat-application-six-sooty.vercel.app/",
   },
   {
     iconComponent: <MiniBarChart />,
