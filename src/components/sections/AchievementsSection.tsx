@@ -1,23 +1,27 @@
 import { motion } from "framer-motion";
-import { Code2, Star } from "lucide-react";
+import { Code2, Star, ExternalLink } from "lucide-react";
 import { FadeInLeft, FadeInUp } from "@/components/animations/MotionWrapper";
 
 const achievements = [
   {
-    icon: <Code2 size={24} className="text-primary" />,
-    iconBg: "bg-primary/10",
-    title: "100+ Problems Solved",
-    value: "100+",
-    description: "on LeetCode, HackerRank, and GeeksforGeeks.",
-    glowColor: "hsl(var(--primary))",
+    icon: <Code2 size={24} className="text-[#F97316]" />,
+    iconBg: "bg-[#F97316]/10",
+    title: "LeetCode",
+    value: "100+ Problems Solved",
+    description: "Consistent problem solving practice.",
+    glowColor: "#F97316",
+    link: "https://leetcode.com/u/nitesh_11/",
+    linkText: "View Profile",
   },
   {
-    icon: <Star size={24} className="text-[#F59E0B]" />,
-    iconBg: "bg-[#F59E0B]/10",
-    title: "4-Star Java Rating",
-    value: "4 Star",
-    description: "on HackerRank.",
-    glowColor: "var(--color-yellow-500)",
+    icon: <Star size={24} className="text-[#4ADE80]" />,
+    iconBg: "bg-[#4ADE80]/10",
+    title: "HackerRank",
+    value: "4-Star Java Rating",
+    description: "Achieved persistent 4-star rating in Java problem solving.",
+    glowColor: "#4ADE80",
+    link: "https://www.hackerrank.com/profile/nitesh1123",
+    linkText: "View Profile",
   },
 ];
 
@@ -73,11 +77,24 @@ export const AchievementsSection = () => {
                   </div>
                 </div>
 
-                {/* Value/Badge */}
-                <div className="mt-4 md:mt-0 md:ml-auto">
-                  <span className="text-2xl font-bold text-foreground font-mono tracking-tight bg-background/50 px-4 py-2 rounded-xl border border-border/50 inline-block">
+                {/* Value/Badge or Link Button */}
+                <div className="mt-4 md:mt-0 md:ml-auto flex flex-col items-start md:items-end gap-3">
+                  <span className="text-lg font-bold text-foreground font-mono tracking-tight">
                     {item.value}
                   </span>
+                  {item.link && (
+                    <motion.a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 text-sm font-semibold rounded-lg bg-background/50 border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center gap-2"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {item.linkText}
+                      <ExternalLink size={14} />
+                    </motion.a>
+                  )}
                 </div>
               </motion.div>
             </FadeInUp>
