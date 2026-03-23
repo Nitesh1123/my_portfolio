@@ -5,9 +5,9 @@ import { Sparkles, Terminal, ArrowRight } from "lucide-react";
 export const LiveDemoWidget = () => {
   const [inputText, setInputText] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [result, setResult] = useState<{ label: string; confidence: number; color: string } | null>(null);
+  const [result, setResult] = useState<{ label: string; confidence: number; color: string; emoji: string } | null>(null);
 
-  // Simple hardcoded mock logic for instant UI feedback without loading heavy ML models
+  // Proper keyword-based sentiment scoring system
   const analyzeSentiment = (text: string) => {
     setIsAnalyzing(true);
     setResult(null);
@@ -15,28 +15,49 @@ export const LiveDemoWidget = () => {
     setTimeout(() => {
       const lowerText = text.toLowerCase();
       
-      const positiveWords = ["good", "great", "awesome", "excellent", "love", "happy", "amazing", "best", "cool"];
-      const negativeWords = ["bad", "terrible", "awful", "hate", "sad", "worst", "poor", "boring"];
+      const negativeWords = ['failed', 'wrong', 'terrible', 'bad', 'awful', 'horrible', 'disappointing', 'unreliable', 'poor', 'worst', 'useless', 'broken', 'error', 'crash', 'hate', 'slow', 'ugly', 'stupid', 'annoying', 'boring', 'difficult', 'impossible', 'never', 'problem', 'issue', 'bug', 'fail', 'miss', 'loss', 'hurt', 'damage'];
+      const positiveWords = ['love', 'great', 'excellent', 'amazing', 'good', 'best', 'awesome', 'fantastic', 'brilliant', 'passionate', 'happy', 'excited', 'beautiful', 'perfect', 'wonderful', 'incredible', 'outstanding', 'superb', 'enjoy', 'like', 'success', 'achieve', 'build', 'solve', 'improve', 'learn', 'grow', 'win', 'smart', 'fast'];
       
-      let score = 0;
-      positiveWords.forEach(word => { if (lowerText.includes(word)) score += 1; });
-      negativeWords.forEach(word => { if (lowerText.includes(word)) score -= 1; });
+      let positiveScore = 0;
+      let negativeScore = 0;
+      
+      positiveWords.forEach(word => { 
+        if (lowerText.includes(word)) positiveScore += 1; 
+      });
+      negativeWords.forEach(word => { 
+        if (lowerText.includes(word)) negativeScore += 1; 
+      });
 
-      // Add some random noise to confidence so it looks like a real model output
-      const baseConfidence = 70 + Math.random() * 25; 
+      let sentiment: { label: string; confidence: number; color: string; emoji: string };
 
-      if (score > 0 || (score === 0 && text.length > 10 && !lowerText.includes("not"))) {
-        setResult({ label: "Positive", confidence: Math.min(99.9, baseConfidence + 10), color: "bg-primary text-primary" });
-      } else if (score < 0) {
-        setResult({ label: "Negative", confidence: Math.min(99.9, baseConfidence + 5), color: "bg-destructive text-destructive" });
-      } else if (text.length === 0) {
-         setResult(null);
+      if (positiveScore > negativeScore) {
+        const confidence = Math.min(98, 70 + (positiveScore * 5));
+        sentiment = { 
+          label: "Positive", 
+          confidence, 
+          color: "#4ADE80",
+          emoji: "✅"
+        };
+      } else if (negativeScore > positiveScore) {
+        const confidence = Math.min(98, 70 + (negativeScore * 5));
+        sentiment = { 
+          label: "Negative", 
+          confidence, 
+          color: "#EF4444",
+          emoji: "❌"
+        };
       } else {
-        setResult({ label: "Neutral", confidence: Math.max(40, baseConfidence - 20), color: "bg-secondary text-secondary" });
+        sentiment = { 
+          label: "Neutral", 
+          confidence: 85, 
+          color: "#9CA3AF",
+          emoji: "⚪"
+        };
       }
       
+      setResult(sentiment);
       setIsAnalyzing(false);
-    }, 800); // Artificial delay to simulate processing
+    }, 800);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -134,19 +155,27 @@ export const LiveDemoWidget = () => {
               initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
               className="flex flex-col gap-2 w-full"
             >
-              <div className="flex justify-between items-center text-sm font-bold">
-                <span className={result.color.split(" ")[1]}>Output: {result.label}</span>
-                <span className="text-muted-foreground font-mono">{result.confidence.toFixed(1)}% Confidence</span>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">{result.emoji}</span>
+                  <span 
+                    className="text-xl font-bold"
+                    style={{ color: result.color }}
+                  >
+                    {result.label}
+                  </span>
+                </div>
+                <span className="text-muted-foreground font-mono text-sm">{result.confidence.toFixed(1)}% Confidence</span>
               </div>
               
               {/* Animated Progress Bar */}
               <div className="w-full h-2 bg-background/50 rounded-full overflow-hidden">
                 <motion.div 
-                  className={`h-full rounded-full ${result.color.split(" ")[0]}`}
+                  className="h-full rounded-full"
+                  style={{ backgroundColor: result.color }}
                   initial={{ width: 0 }}
                   animate={{ width: `${result.confidence}%` }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  style={{ boxShadow: `0 0 10px var(--tw-bg-opacity, 1)` }}
                 />
               </div>
             </motion.div>
