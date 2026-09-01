@@ -1,12 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 
 const typingTexts = [
-  "I build ML models with 99.76% accuracy.",
-  "I engineer real-time chat applications.",
-  "I analyze data with Pandas & Scikit-Learn.",
-  "I detect network intrusions with Random Forest.",
-  "I turn raw data into actionable insights.",
-  "I build full-stack web applications.",
+  "I build RAG pipelines & LLM apps.",
+  "I train ML models that solve real problems.",
+  "I turn data into actionable insights.",
+  "I design end-to-end analytics systems.",
+  "I make AI work in the real world.",
 ];
 
 export const useTypingEffect = (typeSpeed = 100, deleteSpeed = 50, pauseDuration = 2000) => {

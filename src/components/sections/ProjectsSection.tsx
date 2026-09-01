@@ -5,57 +5,49 @@ import { AnimatedCard } from "@/components/animations/AnimatedCard";
 import { LiveDemoWidget } from "@/components/animations/LiveDemoWidget";
 import { AnimatedBadge } from "@/components/animations/AnimatedBadge";
 import { MiniBarChart } from "@/components/animations/MiniBarChart";
+import { LineChart, Database } from "lucide-react";
 
 const projects = [
   {
     iconComponent: (
       <div className="p-3 bg-primary/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--primary)_/_0.3)]">
-        <ShieldAlert size={36} className="text-primary" />
+        <LineChart size={36} className="text-primary" />
       </div>
     ),
-    title: "Intrusion Detection System",
+    title: "EquityBot – AI Equity Research Assistant",
     description:
-      "Developed an ML-powered IDS to detect and classify malicious network traffic using the NSL-KDD benchmark dataset. Achieved 99.76% classification accuracy using a fine-tuned Random Forest model.",
-    technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Streamlit", "Scikit-Learn"],
-    github: "https://github.com/Nitesh1123/Enhancing-Intrusion-Detection-Systems-Project",
-    demo: "https://niju7410-ids-intrusion-detection.hf.space/",
-    badgeComponent: <AnimatedBadge targetNumber={99.76} suffix="% Accuracy" />,
-  },
-  {
-    iconComponent: (
-      <div className="p-3 bg-accent/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--accent)_/_0.3)]">
-        <BrainCircuit size={36} className="text-accent" />
-      </div>
-    ),
-    title: "Machine Learning Model",
-    description:
-      "Implemented and compared Logistic Regression and Random Forest for binary and multi-class classification. Evaluated using accuracy, precision, recall, and F1-score metrics.",
-    technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Streamlit", "Scikit-Learn"],
-    github: "https://github.com/Nitesh1123",
-    demo: "#",
+      "A Retrieval-Augmented Generation (RAG) application that ingests financial news articles from URLs and enables natural language Q&A with cited sources. Built an end-to-end LLM pipeline using LangChain.",
+    technologies: ["Python", "LangChain", "Google Gemini", "FAISS", "Streamlit", "RAG"],
+    github: "https://github.com/Nitesh1123/equity-research-tool",
+    demo: "https://equity-research-tool-7kkour4wxz3wuccdakcuhi.streamlit.app/",
   },
   {
     iconComponent: (
       <div className="p-3 bg-secondary/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--secondary)_/_0.3)]">
-        <MessageCircle size={36} className="text-secondary" />
+        <Database size={36} className="text-secondary" />
       </div>
     ),
-    title: "Real-Time Chat Application",
+    title: "Retail Orders Analytics Pipeline",
     description:
-      "Engineered a secure real-time chat platform with JWT authentication, role-based access, one-to-one and group messaging via WebSockets, with typing indicators and online presence.",
-    technologies: ["React", "Node.js", "Express.js", "MongoDB", "WebSockets"],
-    github: "https://github.com/Nitesh1123/ChatApplication",
-    demo: "https://chat-application-six-sooty.vercel.app/",
+      "Automated an end-to-end ETL pipeline in Python (Pandas, SQLAlchemy) processing 9,994+ retail order records into Microsoft SQL Server. Built an interactive 3-page Power BI dashboard with custom DAX measures.",
+    technologies: ["Python", "Pandas", "SQLAlchemy", "T-SQL", "Power BI", "ETL"],
+    github: "https://github.com/Nitesh1123/Retail-Orders-Analysis-with-SQL-Python",
+    demo: "#",
   },
   {
-    iconComponent: <MiniBarChart />,
-    title: "Disk Scheduling Simulator",
+    iconComponent: (
+      <div className="p-3 bg-accent/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--accent)_/_0.3)]">
+        <ShieldAlert size={36} className="text-accent" />
+      </div>
+    ),
+    title: "Intrusion Detection System",
     description:
-      "An interactive web-based simulator for visualizing operating system disk scheduling algorithms including FCFS, SCAN, C-SCAN, and more. Features real-time algorithm visualization and performance metrics.",
-    technologies: ["JavaScript", "HTML/CSS", "Algorithms"],
-    github: "https://github.com/rai-kriti/OS",
-    demo: "https://rai-kriti.github.io/OS/",
-  },
+      "Developed an ML-based intrusion detection system to detect and classify malicious network traffic using the NSL-KDD benchmark dataset. Achieved 99.76% classification accuracy using a fine-tuned Random Forest model.",
+    technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Streamlit", "Scikit-Learn"],
+    github: "https://github.com/Nitesh1123/Enhancing-Intrusion-Detection-Systems-Project/tree/main/IDS%20PROJECT",
+    demo: "https://niju7410-ids-intrusion-detection.hf.space/",
+    badgeComponent: <AnimatedBadge targetNumber={99.76} suffix="% Accuracy" />,
+  }
 ];
 
 export const ProjectsSection = () => {
@@ -90,8 +82,7 @@ export const ProjectsSection = () => {
           </h2>
         </FadeInLeft>
 
-        {/* Live Demo Widget */}
-        <LiveDemoWidget />
+        {/* Live Demo Widget Removed for equal spacing */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (

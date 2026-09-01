@@ -44,7 +44,7 @@ export const AboutSection = () => {
                   <h3 className="text-xl font-bold text-foreground">Mission & Impact</h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  B.Tech CSE student at Lovely Professional University (CGPA: 8.19), passionate about Machine Learning, Data Science, and Full-Stack Development. I build systems that turn complex data into measurable real-world impact.
+                  B.Tech CSE student at Lovely Professional University (CGPA: 8.21), passionate about Machine Learning, Data Science, and AI Engineering. I build systems that turn complex data into measurable real-world impact.
                 </p>
               </div>
             </FadeInUp>
@@ -72,7 +72,7 @@ export const AboutSection = () => {
                   <h3 className="text-xl font-bold text-foreground">Core Values</h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Passionate about building ML-powered solutions and full-stack applications. Focused on clean architecture, continuous learning, and turning complex data into actionable insights through collaborative development.
+                  Passionate about building ML-powered solutions and AI-driven applications. Focused on clean architecture, continuous learning, and turning complex data into actionable insights through collaborative development.
                 </p>
               </div>
             </FadeInUp>

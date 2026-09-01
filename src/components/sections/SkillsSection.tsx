@@ -40,14 +40,13 @@ const skillGroups = [
     ],
   },
   {
-    category: "Web & Frameworks",
+    category: "Frameworks & AI Tools",
     skills: [
       { name: "React.js", rating: 3, icon: Atom },
       { name: "Node.js", rating: 2, icon: Server },
-      { name: "Tailwind", rating: 3, icon: Palette },
-      { name: "HTML/CSS", rating: 3, icon: Layout },
+      { name: "LangChain", rating: 3, icon: Bot },
       { name: "Flask", rating: 2, icon: FlaskConical },
-      { name: "PHP", rating: 2, icon: Code },
+      { name: "TensorFlow", rating: 2, icon: BrainCircuit },
     ],
   },
   {
