@@ -3,11 +3,12 @@ import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
-  { href: "#skills", label: "Skills" },
-  { href: "#achievements", label: "Achievements" },
-  { href: "#contact", label: "Contact" },
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
+  { label: "Resume", href: "/CV.pdf" },
 ];
 
 export const Navbar = () => {
@@ -37,6 +38,11 @@ export const Navbar = () => {
   }, []);
 
   const handleNavClick = (href: string) => {
+    if (!href.startsWith("#")) {
+      window.open(href, "_blank");
+      setIsMobileMenuOpen(false);
+      return;
+    }
     const targetId = href.substring(1);
     const element = document.getElementById(targetId);
     if (element) {

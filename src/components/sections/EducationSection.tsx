@@ -6,7 +6,7 @@ const educationEntries = [
   {
     institution: "Lovely Professional University",
     degree: "B.Tech Computer Science & Engineering",
-    details: "CGPA: 8.19",
+    details: "CGPA: 8.21",
     period: "Aug 2023 – Present",
     location: "Phagwara, Punjab",
     icon: GraduationCap,
