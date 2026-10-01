@@ -1,48 +1,19 @@
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+﻿import { personal } from "@/data/cv";
 
-export const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  return (
-    <motion.footer
-      className="py-10 border-t border-border/30 text-center flex flex-col items-center justify-center relative z-10"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-    >
-      {/* Social Links */}
-      <div className="flex gap-4 mb-6">
-        <a href="https://github.com/Nitesh1123" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:shadow-[0_0_15px_rgba(74,222,128,0.4)] transition-all duration-300 group">
-          <Github size={18} className="group-hover:scale-110 transition-transform" />
-        </a>
-        <a href="https://www.linkedin.com/in/nitesh-chandel/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:shadow-[0_0_15px_rgba(74,222,128,0.4)] transition-all duration-300 group">
-          <Linkedin size={18} className="group-hover:scale-110 transition-transform" />
-        </a>
-        <a href="mailto:knitesh1123@gmail.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:shadow-[0_0_15px_rgba(74,222,128,0.4)] transition-all duration-300 group">
-          <Mail size={18} className="group-hover:scale-110 transition-transform" />
-        </a>
-      </div>
-
-      <p className="text-muted-foreground text-sm">
-        Designed & Built by{" "}
-        <span className="text-primary font-semibold">Nitesh Kumar</span>
+export const Footer = () => (
+  <footer className="relative border-t border-white/5 py-10">
+    <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <span className="text-xl font-black gradient-text">NK</span>
+      <p className="text-white/25 text-xs mono">
+        {new Date().getFullYear()} Nitesh Kumar
       </p>
-      
-      <p className="text-muted-foreground/60 text-xs mt-2 mb-4">
-        © {currentYear}
-      </p>
-      
-      {/* Status Indicator */}
       <div className="flex items-center gap-2">
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4ADE80] opacity-60" />
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#4ADE80]" />
         </span>
-        <span className="text-muted-foreground text-xs uppercase tracking-wider font-medium">
-          Open to opportunities
-        </span>
+        <span className="text-white/25 text-xs mono uppercase tracking-wider">Open to work</span>
       </div>
-    </motion.footer>
-  );
-};
+    </div>
+  </footer>
+);

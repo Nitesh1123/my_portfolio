@@ -1,106 +1,78 @@
 import { motion } from "framer-motion";
-import { Code2, Star, ExternalLink } from "lucide-react";
-import { FadeInLeft, FadeInUp } from "@/components/animations/MotionWrapper";
+import { achievements } from "@/data/cv";
 
-const achievements = [
-  {
-    icon: <Code2 size={24} className="text-[#F97316]" />,
-    iconBg: "bg-[#F97316]/10",
-    title: "LeetCode",
-    value: "100+ Problems Solved",
-    description: "Consistent problem solving practice.",
-    glowColor: "#F97316",
-    link: "https://leetcode.com/u/nitesh_11/",
-    linkText: "View Profile",
-  },
-  {
-    icon: <Star size={24} className="text-[#4ADE80]" />,
-    iconBg: "bg-[#4ADE80]/10",
-    title: "HackerRank",
-    value: "4-Star Java Rating",
-    description: "Achieved persistent 4-star rating in Java problem solving.",
-    glowColor: "#4ADE80",
-    link: "https://www.hackerrank.com/profile/nitesh1123",
-    linkText: "View Profile",
-  },
-];
+export const AchievementsSection = () => (
+  <section id="achievements" className="py-32 relative">
+    <div className="divider mb-0" />
+    <div className="max-w-7xl mx-auto px-4 md:px-8">
 
-export const AchievementsSection = () => {
-  return (
-    <section id="achievements" className="py-24 relative">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "linear-gradient(180deg, transparent 0%, hsl(0 0% 10% / 0.3) 100%)",
-        }}
-      />
+      <motion.div
+        className="mb-16"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <h2 className="section-heading gradient-text-warm">Competitive Programming</h2>
+        <p className="mt-3 text-white/35 text-sm mono">Consistent problem-solving across platforms</p>
+      </motion.div>
 
-      <div className="container mx-auto px-4 md:px-8 relative z-10 w-full max-w-5xl">
-        <FadeInLeft>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center gap-4">
-            <span className="section-number">03.5</span>
-            Achievements
-          </h2>
-        </FadeInLeft>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {achievements.map((item, i) => (
+          <motion.a
+            key={item.platform}
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card-bezel group cursor-pointer"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.12 }}
+            whileHover={{ y: -4 }}
+          >
+            <div
+              className="card-inner p-8 h-full flex flex-col gap-4 relative overflow-hidden"
+              style={{ borderColor: `${item.color}18` }}
+            >
+              {/* Glow */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background: `radial-gradient(ellipse at 30% 30%, ${item.color}10, transparent 70%)` }}
+              />
 
-        <div className="flex flex-col gap-6">
-          {achievements.map((item, index) => (
-            <FadeInUp key={item.title} delay={0.1 * index}>
-              <motion.div
-                className="glass rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative group overflow-hidden border border-border/50"
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
+              {/* Platform */}
+              <span
+                className="text-xs font-bold mono uppercase tracking-[0.2em]"
+                style={{ color: item.color }}
               >
-                {/* Background Hover Glow */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
-                  style={{ backgroundColor: item.glowColor }}
-                />
+                {item.platform}
+              </span>
 
-                <div className="flex items-center gap-6">
-                  {/* Icon Container */}
-                  <div className={`p-4 rounded-2xl shrink-0 ${item.iconBg}`}>
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    >
-                      {item.icon}
-                    </motion.div>
-                  </div>
+              {/* Value */}
+              <div
+                className="display-text text-6xl leading-none"
+                style={{ color: item.color }}
+              >
+                {item.value}
+              </div>
 
-                  {/* Text Content */}
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground mb-2">{item.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed max-w-lg">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
+              {/* Label */}
+              <p className="text-white/45 text-sm">{item.label}</p>
 
-                {/* Value/Badge or Link Button */}
-                <div className="mt-4 md:mt-0 md:ml-auto flex flex-col items-start md:items-end gap-3">
-                  <span className="text-lg font-bold text-foreground font-mono tracking-tight">
-                    {item.value}
-                  </span>
-                  {item.link && (
-                    <motion.a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 text-sm font-semibold rounded-lg bg-background/50 border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center gap-2"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      {item.linkText}
-                      <ExternalLink size={14} />
-                    </motion.a>
-                  )}
-                </div>
-              </motion.div>
-            </FadeInUp>
-          ))}
-        </div>
+              {/* Arrow */}
+              <div
+                className="mt-auto w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                style={{ background: `${item.color}15`, color: item.color }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </div>
+            </div>
+          </motion.a>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);

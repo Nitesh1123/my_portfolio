@@ -1,28 +1,11 @@
-import { NavLink as RouterNavLink, NavLinkProps } from "react-router-dom";
-import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
+// TODO: Reusable nav link component
+// Props: href (string), label (string), isActive (boolean), onClick (function)
+// Shows active underline glow when isActive is true
 
-interface NavLinkCompatProps extends Omit<NavLinkProps, "className"> {
-  className?: string;
-  activeClassName?: string;
-  pendingClassName?: string;
-}
-
-const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
-  ({ className, activeClassName, pendingClassName, to, ...props }, ref) => {
-    return (
-      <RouterNavLink
-        ref={ref}
-        to={to}
-        className={({ isActive, isPending }) =>
-          cn(className, isActive && activeClassName, isPending && pendingClassName)
-        }
-        {...props}
-      />
-    );
-  },
-);
-
-NavLink.displayName = "NavLink";
-
-export { NavLink };
+export const NavLink = ({ href, label, isActive, onClick }: { href: string; label: string; isActive?: boolean; onClick?: () => void }) => {
+  return (
+    <button onClick={onClick} className={isActive ? "text-primary font-bold" : "text-muted-foreground"}>
+      {label}
+    </button>
+  );
+};

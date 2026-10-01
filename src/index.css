@@ -1,224 +1,278 @@
+/* ============================================================
+   Plus Jakarta Sans + JetBrains Mono — Self-hosted via fontsource
+   ============================================================ */
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Dark Portfolio Design System - Nitesh Kumar */
+/* ============================================================
+   DESIGN SYSTEM TOKENS — Nitesh Kumar Portfolio
+   Dark tech / Ethereal Glass aesthetic
+   Primary: Emerald #4ADE80  Secondary: Sky #38BDF8
+   ============================================================ */
 
 @layer base {
   :root {
-    /* Dark theme as default */
-    --background: 0 0% 4%;
-    --foreground: 0 0% 100%;
+    /* Core */
+    --background: 228 14% 4%;
+    --foreground: 0 0% 95%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 100%;
+    /* Surfaces */
+    --card: 228 14% 7%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 228 14% 7%;
+    --popover-foreground: 0 0% 95%;
 
+    /* Accents */
     --primary: 142 69% 58%;
-    --primary-foreground: 0 0% 0%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 199 89% 58%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 199 89% 60%;
+    --secondary-foreground: 0 0% 5%;
 
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 70%;
-
-    --accent: 270 70% 55%;
+    --accent: 270 70% 65%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    /* System */
+    --muted: 228 14% 12%;
+    --muted-foreground: 0 0% 50%;
+
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+    --border: 228 14% 14%;
+    --input: 228 14% 12%;
     --ring: 142 69% 58%;
-
     --radius: 1rem;
 
-    /* Glass effects */
-    --glass-bg: 0 0% 10% / 0.7;
-    --glass-border: 0 0% 100% / 0.1;
-
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(142 69% 58%), hsl(199 89% 58%));
-    --gradient-glow: radial-gradient(circle, hsl(199 89% 58% / 0.15) 0%, transparent 70%);
-
-    /* Shadows */
-    --shadow-glow-green: 0 4px 15px hsl(142 69% 58% / 0.3);
-    --shadow-glow-blue: 0 4px 15px hsl(199 89% 58% / 0.3);
-
-    --sidebar-background: 0 0% 6%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 142 69% 58%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 142 69% 58%;
-  }
-
-  .dark {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 100%;
-
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 100%;
-
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 100%;
-
-    --primary: 142 69% 58%;
-    --primary-foreground: 0 0% 0%;
-
-    --secondary: 199 89% 58%;
-    --secondary-foreground: 0 0% 0%;
-
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 70%;
-
-    --accent: 270 70% 55%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 142 69% 58%;
-
-    --sidebar-background: 0 0% 6%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 142 69% 58%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 142 69% 58%;
+    /* Custom tokens */
+    --glass-bg: rgba(13, 13, 18, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.07);
+    --glass-highlight: rgba(255, 255, 255, 0.04);
+    --emerald: #4ADE80;
+    --sky: #38BDF8;
+    --purple: #A855F7;
+    --glow-emerald: rgba(74, 222, 128, 0.18);
+    --glow-sky: rgba(56, 189, 248, 0.18);
+    --glow-purple: rgba(168, 85, 247, 0.18);
   }
 }
 
+/* ============================================================
+   BASE RESETS
+   ============================================================ */
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-background text-foreground antialiased overflow-x-hidden;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: rgba(74, 222, 128, 0.25);
+    color: #4ADE80;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(74, 222, 128, 0.3);
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(74, 222, 128, 0.6);
   }
 }
 
+/* ============================================================
+   COMPONENT UTILITIES
+   ============================================================ */
 @layer components {
+  /* --- Glass morphism (Ethereal Glass vibe) --- */
   .glass {
-    @apply bg-card/70 backdrop-blur-xl border border-border/30;
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+  }
+
+  /* --- Double-bezel card (from high-end-visual-design skill) --- */
+  .card-bezel {
+    padding: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .card-inner {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-radius: calc(1.5rem - 6px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* --- Typography --- */
+  .display-text {
+    font-family: "Plus Jakarta Sans Variable", sans-serif;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .mono {
+    font-family: "JetBrains Mono", monospace;
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    background: linear-gradient(135deg, var(--emerald), var(--sky));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
-  .gradient-text-light {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--muted-foreground)));
+  .gradient-text-warm {
+    background: linear-gradient(135deg, #F0F0F2 30%, rgba(240, 240, 242, 0.5));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
-  .btn-gradient {
-    @apply font-semibold rounded-full transition-all duration-300;
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(142 69% 45%));
-    box-shadow: var(--shadow-glow-green);
+  /* --- CTA Buttons --- */
+  .btn-primary {
+    @apply inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-sm;
+    background: var(--emerald);
+    color: #050508;
+    transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
   }
 
-  .btn-gradient:hover {
+  .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px hsl(142 69% 58% / 0.5);
+    box-shadow: 0 8px 32px rgba(74, 222, 128, 0.35);
   }
 
-  .btn-outline-gradient {
-    @apply font-semibold rounded-full border-2 border-secondary text-secondary transition-all duration-300;
+  .btn-primary:active {
+    transform: scale(0.98) translateY(0);
   }
 
-  .btn-outline-gradient:hover {
-    @apply bg-secondary text-secondary-foreground;
+  .btn-ghost {
+    @apply inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-sm;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(240, 240, 242, 0.8);
+    background: transparent;
+    transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(74, 222, 128, 0.4);
+    color: var(--emerald);
+    background: rgba(74, 222, 128, 0.06);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px hsl(199 89% 58% / 0.4);
   }
 
-  .section-number {
-    @apply text-primary font-mono text-xl md:text-2xl;
+  .btn-ghost:active {
+    transform: scale(0.98) translateY(0);
   }
 
-  .card-hover {
-    @apply transition-all duration-300;
+  /* Icon circle inside CTA (button-in-button pattern) */
+  .btn-icon-circle {
+    @apply flex items-center justify-center w-7 h-7 rounded-full;
+    background: rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
   }
 
-  .card-hover:hover {
-    transform: translateY(-10px);
-    border-color: hsl(var(--primary));
-    box-shadow: 0 20px 40px hsl(142 69% 58% / 0.2), 0 0 0 1px hsl(142 69% 58% / 0.1);
+  .btn-primary:hover .btn-icon-circle {
+    transform: translate(2px, -1px) scale(1.05);
   }
 
-  .skill-card-hover:hover {
-    transform: translateY(-5px);
-    border-color: hsl(var(--secondary));
-    box-shadow: 0 15px 35px hsl(199 89% 58% / 0.15);
-  }
-
+  /* --- Tech tags --- */
   .tech-tag {
-    @apply bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium border border-primary/20;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mono;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(240, 240, 242, 0.65);
+    transition: all 0.2s ease;
   }
 
-  .nav-link-underline {
-    @apply relative;
+  .tech-tag:hover {
+    background: rgba(74, 222, 128, 0.08);
+    border-color: rgba(74, 222, 128, 0.25);
+    color: var(--emerald);
   }
 
-  .nav-link-underline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300;
-    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
+  /* --- Section number (eyebrow) --- */
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] uppercase font-medium tracking-[0.2em] mono;
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    color: var(--emerald);
   }
 
-  .nav-link-underline:hover::after,
-  .nav-link-underline.active::after {
-    @apply w-full;
+  /* --- Glow orbs (background decorations) --- */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
   }
+
+  /* --- Section headings --- */
+  .section-heading {
+    @apply text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight;
+    font-family: "Plus Jakarta Sans Variable", sans-serif;
+  }
+
+  /* --- Horizontal divider --- */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  }
+
+  /* Scrollbar hide utility */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
 
+/* ============================================================
+   GSAP + ANIMATION HELPERS
+   ============================================================ */
 @layer utilities {
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
-  .animation-delay-600 {
-    animation-delay: 600ms;
-  }
-  
-  @keyframes ticker {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  /* Clip-path for text reveals */
+  .clip-reveal {
+    clip-path: inset(0 0 100% 0);
   }
 
-  .animate-ticker {
-    display: inline-block;
-    animation: ticker 30s linear infinite;
-  }
-}
-
-/* Hide native cursor exclusively on desktop devices */
-@media (pointer: fine) {
-  * {
-    cursor: none !important;
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
