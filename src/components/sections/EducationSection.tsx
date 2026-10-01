@@ -1,144 +1,123 @@
 import { motion } from "framer-motion";
-import { GraduationCap, Award, ExternalLink } from "lucide-react";
-import { FadeInUp } from "@/components/animations/MotionWrapper";
+import { ExternalLink, GraduationCap, Award } from "lucide-react";
+import { education, certifications, training } from "@/data/cv";
 
-const educationEntries = [
-  {
-    institution: "Lovely Professional University",
-    degree: "B.Tech Computer Science & Engineering",
-    details: "CGPA: 8.19",
-    period: "Aug 2023 – Present",
-    location: "Phagwara, Punjab",
-    icon: GraduationCap,
-    iconColor: "text-primary",
-    iconBg: "bg-primary/10",
-    badgeColor: "bg-primary/10 text-primary",
-  },
-  {
-    institution: "Doon Valley Public School",
-    degree: "Intermediate",
-    details: "83.6%",
-    period: "Apr 2022 – Mar 2023",
-    location: "Nalagarh, Himachal Pradesh",
-    icon: GraduationCap,
-    iconColor: "text-secondary",
-    iconBg: "bg-secondary/10",
-    badgeColor: "bg-secondary/10 text-secondary",
-  },
-  {
-    institution: "Doon Valley Public School",
-    degree: "Matriculation",
-    details: "78.6%",
-    period: "Apr 2020 – Mar 2021",
-    location: "Nalagarh, Himachal Pradesh",
-    icon: GraduationCap,
-    iconColor: "text-accent",
-    iconBg: "bg-accent/10",
-    badgeColor: "bg-accent/10 text-accent",
-  },
-];
+export const EducationSection = () => (
+  <section id="education" className="py-32 relative">
+    <div className="divider mb-0" />
+    <div className="max-w-7xl mx-auto px-4 md:px-8">
 
-const certifications = [
-  {
-    name: "Git and GitHub — CipherSchools",
-    period: "Jun 2023 – Jun 2024",
-    url: "https://drive.google.com/file/d/1Qjv3bPWWnEli4UBjvi6CN1c4k4osamt9/view",
-  },
-  {
-    name: "Social Networks — NPTEL",
-    period: "Jul 2025 – Nov 2025",
-    url: "https://drive.google.com/file/d/1K-ql5cmu_fDHi_w1z0ziSgWxR_-NXtX8/view",
-  },
-  {
-    name: "Gen AI — NASSCOM / SFJ Skill Development Program",
-    period: "Feb 2025",
-    url: "https://drive.google.com/file/d/18bN-y8d3EqR8YE9H2sTFw24AFLXUiv6R/view",
-  },
-  {
-    name: "Training in Machine Learning — CipherSchools",
-    period: "Jun 2025 – Jul 2025",
-    details: "Covered Regression, Decision Trees, Random Forest, SVM, K-Means, PCA, NLP, CNN",
-    url: "https://drive.google.com/file/d/1R_3JUlNB9x-YXQUk0oEiekiCbygCIGsd/view",
-  },
-];
+      <motion.div
+        className="mb-16"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <h2 className="section-heading gradient-text-warm">Education &amp; Credentials</h2>
+      </motion.div>
 
-export const EducationSection = () => {
-  return (
-    <section className="py-12 relative">
-      <div className="container mx-auto px-4 md:px-8 relative z-10 w-full max-w-5xl">
-        
-        {/* Education Header */}
-        <FadeInUp>
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
-            <span className="text-primary">03.75</span>
-            Education & Certifications
-          </h2>
-        </FadeInUp>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        {/* Left: Education */}
+        <div>
+          <h3 className="text-xs mono uppercase tracking-[0.2em] text-white/30 mb-8 flex items-center gap-2">
+            <GraduationCap size={14} className="text-[#4ADE80]" />
+            Education
+          </h3>
 
-        <div className="flex flex-col gap-8">
-          
-        {/* Education Cards */}
-          {educationEntries.map((edu, index) => (
-            <FadeInUp key={edu.institution + edu.degree} delay={0.1 * (index + 1)}>
-              <div className="glass rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 relative overflow-hidden border border-border/50 group card-hover">
-                <div className={`p-4 rounded-2xl shrink-0 ${edu.iconBg}`}>
-                  <edu.icon size={32} className={edu.iconColor} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-foreground mb-1">
-                    {edu.institution}
-                  </h3>
-                  <p className="text-muted-foreground text-sm font-medium mb-1">
-                    {edu.degree}
-                  </p>
-                  <p className="text-muted-foreground/70 text-xs">
-                    {edu.location}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-2 text-xs font-mono mt-3">
-                    <span className={`px-2 py-1 rounded-md ${edu.badgeColor}`}>{edu.details}</span>
-                    <span className={`px-2 py-1 rounded-md ${edu.badgeColor}`}>{edu.period}</span>
+          <div className="flex flex-col gap-4">
+            {education.map((edu, i) => (
+              <motion.div
+                key={edu.institution + edu.degree}
+                className="card-bezel"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <div className={`card-inner p-6 relative overflow-hidden ${edu.current ? "border-[#4ADE80]/20" : ""}`}>
+                  {edu.current && (
+                    <div className="absolute top-4 right-4 flex items-center gap-1.5">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4ADE80] opacity-75" />
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#4ADE80]" />
+                      </span>
+                      <span className="text-[10px] text-[#4ADE80] mono">Current</span>
+                    </div>
+                  )}
+                  <p className="text-white/30 text-xs mono mb-1">{edu.period}</p>
+                  <h4 className="text-white/90 font-bold text-base mb-0.5">{edu.institution}</h4>
+                  <p className="text-white/45 text-sm mb-3">{edu.degree}</p>
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="px-2.5 py-1 rounded-full text-xs font-semibold mono"
+                      style={{ background: "rgba(74,222,128,0.1)", color: "#4ADE80", border: "1px solid rgba(74,222,128,0.2)" }}
+                    >
+                      {edu.grade}
+                    </span>
+                    <span className="text-white/25 text-xs">{edu.location}</span>
                   </div>
                 </div>
-              </div>
-            </FadeInUp>
-          ))}
-
-          {/* Certifications Container */}
-          <div>
-            <FadeInUp delay={0.2}>
-              <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                <Award size={20} className="text-secondary" />
-                Certifications
-              </h3>
-            </FadeInUp>
-
-            <div className="flex flex-wrap gap-3">
-              {certifications.map((cert, index) => (
-                <FadeInUp key={index} delay={0.3 + index * 0.1}>
-                  <motion.a
-                    href={cert.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-start gap-1 px-4 py-3 border border-[#38BDF8]/30 bg-[#38BDF8]/10 text-[#38BDF8] text-sm font-medium rounded-xl cursor-pointer hover:bg-[#38BDF8]/20 transition-colors max-w-md"
-                    whileHover={{ scale: 1.02, y: -2, boxShadow: "0 0 20px rgba(56, 189, 248, 0.4)" }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold">{cert.name}</span>
-                      <ExternalLink size={14} />
-                    </div>
-                    <span className="text-xs text-[#38BDF8]/70">{cert.period}</span>
-                    {cert.details && (
-                      <span className="text-xs text-[#38BDF8]/60 leading-tight">{cert.details}</span>
-                    )}
-                  </motion.a>
-                </FadeInUp>
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </div>
+        </div>
 
+        {/* Right: Certifications */}
+        <div>
+          <h3 className="text-xs mono uppercase tracking-[0.2em] text-white/30 mb-8 flex items-center gap-2">
+            <Award size={14} className="text-[#38BDF8]" />
+            Certifications
+          </h3>
+
+          <div className="flex flex-col gap-3">
+            {certifications.map((cert, i) => (
+              <motion.a
+                key={cert.name}
+                href={cert.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-bezel group cursor-pointer"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ x: 4 }}
+              >
+                <div className="card-inner p-5 flex items-start justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white/80 text-sm font-semibold truncate">{cert.name}</p>
+                    <p className="text-white/35 text-xs mt-0.5 mono">{cert.issuer} · {cert.period}</p>
+                    {cert.details && (
+                      <p className="text-white/25 text-[11px] mt-1 leading-relaxed">{cert.details}</p>
+                    )}
+                  </div>
+                  <ExternalLink
+                    size={14}
+                    className="flex-shrink-0 text-white/25 group-hover:text-[#38BDF8] transition-colors mt-0.5"
+                  />
+                </div>
+              </motion.a>
+            ))}
+
+            {/* Training entry */}
+            <motion.div
+              className="card-bezel"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: certifications.length * 0.1 }}
+            >
+              <div className="card-inner p-5 border-[#4ADE80]/10">
+                <p className="text-[#4ADE80] text-[11px] mono uppercase tracking-wider mb-1">Training</p>
+                <p className="text-white/80 text-sm font-semibold">{training.role}</p>
+                <p className="text-white/35 text-xs mono">{training.institution} · {training.period}</p>
+                <p className="text-white/30 text-[11px] mt-1 leading-relaxed">{training.description}</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);

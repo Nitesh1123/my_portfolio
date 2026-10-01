@@ -1,208 +1,129 @@
+import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  FileCode,
-  Braces,
-  Coffee,
-  Cpu,
-  Atom,
-  Server,
-  Palette,
-  Layout,
-  FlaskConical,
-  Code,
-  Table,
-  BrainCircuit,
-  BarChart3,
-  AppWindow,
-  Search,
-  Bot,
-  GitBranch,
-  Database,
-  Server as MongoIcon,
-  PieChart,
-  Code2,
-  FileSpreadsheet,
-} from "lucide-react";
-import { FadeInLeft } from "@/components/animations/MotionWrapper";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { skills } from "@/data/cv";
 
-// 3 out of 5 = 3 filled, 2 empty
-// 2 out of 5 = 2 filled, 3 empty
-// 4 out of 5 = 4 filled, 1 empty
+gsap.registerPlugin(ScrollTrigger);
 
-const skillGroups = [
-  {
-    category: "Languages",
-    skills: [
-      { name: "Python", rating: 3, icon: FileCode },
-      { name: "JavaScript", rating: 3, icon: Braces },
-      { name: "Java", rating: 3, icon: Coffee },
-      { name: "C/C++", rating: 2, icon: Cpu },
-    ],
-  },
-  {
-    category: "Web & Frameworks",
-    skills: [
-      { name: "React.js", rating: 3, icon: Atom },
-      { name: "Node.js", rating: 2, icon: Server },
-      { name: "Tailwind", rating: 3, icon: Palette },
-      { name: "HTML/CSS", rating: 3, icon: Layout },
-      { name: "Flask", rating: 2, icon: FlaskConical },
-      { name: "PHP", rating: 2, icon: Code },
-    ],
-  },
-  {
-    category: "Data Science & ML",
-    skills: [
-      { name: "Pandas", rating: 3, icon: Table },
-      { name: "Scikit-Learn", rating: 3, icon: BrainCircuit },
-      { name: "Matplotlib", rating: 3, icon: BarChart3 },
-      { name: "Streamlit", rating: 2, icon: AppWindow },
-      { name: "EDA", rating: 3, icon: Search },
-      { name: "ML Models", rating: 3, icon: Bot },
-    ],
-  },
-  {
-    category: "Tools",
-    skills: [
-      { name: "Git/GitHub", rating: 3, icon: GitBranch },
-      { name: "MySQL", rating: 3, icon: Database },
-      { name: "MongoDB", rating: 2, icon: MongoIcon },
-      { name: "Power BI", rating: 2, icon: PieChart },
-      { name: "VS Code", rating: 4, icon: Code2 },
-      { name: "Excel", rating: 2, icon: FileSpreadsheet },
-    ],
-  },
+// 6 groups, 3-col grid, grid-flow-dense
+// Spans: [2,1, 1,2, 2,1] = perfectly fills 3 cols x 2 rows with no gaps
+const SPANS = [
+  "col-span-2",  // Languages — wide
+  "col-span-1",  // Frontend
+  "col-span-1",  // Backend — tall
+  "col-span-2",  // AI / ML — wide
+  "col-span-1",  // Databases
+  "col-span-2",  // Tools — wide
 ];
 
-const DotRating = ({ rating }: { rating: number }) => {
-  return (
-    <div className="flex items-center gap-[3px]">
-      {[...Array(5)].map((_, i) => (
-        <div
-          key={i}
-          className={`w-[5px] h-[5px] rounded-full transition-all duration-300 ${
-            i < rating
-              ? "bg-[#4ADE80] shadow-[0_0_4px_rgba(74,222,128,0.8)]"
-              : "bg-border/30"
-          }`}
-        />
-      ))}
-    </div>
-  );
-};
-
-const SkillPill = ({
-  skill,
-  index,
-  groupIndex,
-}: {
-  skill: (typeof skillGroups)[0]["skills"][0];
-  index: number;
-  groupIndex: number;
-}) => {
-  const Icon = skill.icon;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.9 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{
-        delay: groupIndex * 0.1 + index * 0.03,
-        duration: 0.4,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-      whileHover={{
-        scale: 1.05,
-        borderColor: "rgba(74, 222, 128, 0.4)",
-        boxShadow: "0 0 20px rgba(74, 222, 128, 0.15)",
-      }}
-      className="flex items-center gap-2 px-3 py-2 rounded-lg glass border border-border/20 bg-background/40 cursor-default"
-    >
-      <Icon size={14} className="text-[#4ADE80]/80" />
-      <span className="text-xs font-medium text-foreground/90 whitespace-nowrap">
-        {skill.name}
-      </span>
-      <DotRating rating={skill.rating} />
-    </motion.div>
-  );
+const COLORS: Record<string, string> = {
+  Languages: "#4ADE80",
+  Frontend: "#38BDF8",
+  Backend: "#F97316",
+  "AI / ML": "#A855F7",
+  Databases: "#FBBF24",
+  Tools: "#6B7280",
 };
 
 export const SkillsSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // GSAP: pin title left while skills grid scrolls — per gpt-taste scroll-pinning rule
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced || !sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Scrubbing word-opacity reveal on skills pills
+      const pills = gsap.utils.toArray<HTMLElement>(".skill-pill");
+      gsap.fromTo(
+        pills,
+        { opacity: 0.1, y: 10 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.03,
+          ease: "none",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 80%",
+            end: "bottom 60%",
+            scrub: 1,
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="skills" className="py-24 relative">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(180deg, transparent 0%, hsl(0 0% 10% / 0.3) 100%)",
-        }}
-      />
+    <section id="skills" ref={sectionRef} className="py-32 md:py-48 relative">
+      <div className="divider" />
 
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <FadeInLeft>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center gap-4">
-            <span className="section-number">03.</span>
-            Skills & Technologies
-          </h2>
-        </FadeInLeft>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillGroups.map((group, groupIndex) => (
-            <motion.div
-              key={group.category}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: groupIndex * 0.15, duration: 0.5 }}
-              className="space-y-4"
-            >
-              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground/60 mb-4">
-                {group.category}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill, index) => (
-                  <SkillPill
-                    key={skill.name}
-                    skill={skill}
-                    index={index}
-                    groupIndex={groupIndex}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Legend */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 mt-20">
+        <motion.h2
+          ref={titleRef}
+          className="display-text gradient-text-warm mb-14"
+          style={{ fontSize: "clamp(2.4rem, 4vw, 3.8rem)", lineHeight: 1.05 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
-          className="mt-12 flex items-center justify-center gap-6 text-xs text-muted-foreground/50"
+          transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
         >
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-[2px]">
-              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
-              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
-              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
-              <div className="w-[4px] h-[4px] rounded-full bg-border/30" />
-              <div className="w-[4px] h-[4px] rounded-full bg-border/30" />
-            </div>
-            <span>Familiar</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-[2px]">
-              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
-              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
-              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
-              <div className="w-[4px] h-[4px] rounded-full bg-[#4ADE80]" />
-              <div className="w-[4px] h-[4px] rounded-full bg-border/30" />
-            </div>
-            <span>Proficient</span>
-          </div>
-        </motion.div>
+          Tech I use
+        </motion.h2>
+
+        {/* Gapless bento — grid-flow-dense guarantees zero empty cells */}
+        <div
+          ref={gridRef}
+          className="grid grid-cols-3 grid-flow-dense gap-3"
+        >
+          {skills.map((group, i) => {
+            const color = COLORS[group.category] ?? "#4ADE80";
+            return (
+              <div
+                key={group.category}
+                className={`${SPANS[i]} card-bezel group`}
+              >
+                <div
+                  className="card-inner p-5 h-full relative overflow-hidden"
+                  style={{ minHeight: "120px" }}
+                >
+                  {/* Hover glow */}
+                  <div
+                    className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: `radial-gradient(circle, ${color}18, transparent 70%)`, filter: "blur(12px)" }}
+                  />
+
+                  {/* Category */}
+                  <p
+                    className="mono text-[10px] font-bold uppercase tracking-[0.2em] mb-3"
+                    style={{ color }}
+                  >
+                    {group.category}
+                  </p>
+
+                  {/* Compact pill row */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {group.items.map((skill) => (
+                      <span
+                        key={skill}
+                        className="skill-pill px-2.5 py-1 rounded-md text-xs font-medium mono text-white/55"
+                        style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

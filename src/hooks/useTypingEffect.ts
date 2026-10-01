@@ -1,44 +1,47 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
-const typingTexts = [
-  "I build ML models with 99.76% accuracy.",
-  "I engineer real-time chat applications.",
-  "I analyze data with Pandas & Scikit-Learn.",
-  "I detect network intrusions with Random Forest.",
-  "I turn raw data into actionable insights.",
-  "I build full-stack web applications.",
+const ROLES = [
+  "Full-Stack Developer",
+  "ML Engineer",
+  "System Architect",
+  "Problem Solver",
 ];
 
-export const useTypingEffect = (typeSpeed = 100, deleteSpeed = 50, pauseDuration = 2000) => {
-  const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
+const TYPING_SPEED = 80;
+const DELETING_SPEED = 40;
+const PAUSE_AFTER_TYPE = 2000;
+const PAUSE_AFTER_DELETE = 400;
+
+export function useTypingEffect(): string {
+  const [text, setText] = useState("");
+  const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const tick = useCallback(() => {
-    const currentText = typingTexts[currentIndex];
-
-    if (isDeleting) {
-      setDisplayText(currentText.substring(0, displayText.length - 1));
-    } else {
-      setDisplayText(currentText.substring(0, displayText.length + 1));
-    }
-  }, [currentIndex, displayText, isDeleting]);
-
   useEffect(() => {
-    const currentText = typingTexts[currentIndex];
-    let timeout: NodeJS.Timeout;
+    const current = ROLES[roleIndex % ROLES.length];
 
-    if (!isDeleting && displayText === currentText) {
-      timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
-    } else if (isDeleting && displayText === "") {
-      setIsDeleting(false);
-      setCurrentIndex((prev) => (prev + 1) % typingTexts.length);
-    } else {
-      timeout = setTimeout(tick, isDeleting ? deleteSpeed : typeSpeed);
+    if (!isDeleting && text === current) {
+      // Finished typing — pause then start deleting
+      const timeout = setTimeout(() => setIsDeleting(true), PAUSE_AFTER_TYPE);
+      return () => clearTimeout(timeout);
     }
+
+    if (isDeleting && text === "") {
+      // Finished deleting — pause then move to next role
+      const timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setRoleIndex((i) => (i + 1) % ROLES.length);
+      }, PAUSE_AFTER_DELETE);
+      return () => clearTimeout(timeout);
+    }
+
+    const speed = isDeleting ? DELETING_SPEED : TYPING_SPEED;
+    const timeout = setTimeout(() => {
+      setText(isDeleting ? current.slice(0, text.length - 1) : current.slice(0, text.length + 1));
+    }, speed);
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentIndex, tick, typeSpeed, deleteSpeed, pauseDuration]);
+  }, [text, isDeleting, roleIndex]);
 
-  return displayText;
-};
+  return text;
+}

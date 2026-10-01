@@ -1,168 +1,214 @@
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Github, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
-import { Github, ExternalLink, ShieldAlert, BrainCircuit, MessageCircle } from "lucide-react";
-import { FadeInLeft } from "@/components/animations/MotionWrapper";
-import { AnimatedCard } from "@/components/animations/AnimatedCard";
-import { LiveDemoWidget } from "@/components/animations/LiveDemoWidget";
-import { AnimatedBadge } from "@/components/animations/AnimatedBadge";
-import { MiniBarChart } from "@/components/animations/MiniBarChart";
+import { projects } from "@/data/cv";
 
-const projects = [
-  {
-    iconComponent: (
-      <div className="p-3 bg-primary/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--primary)_/_0.3)]">
-        <ShieldAlert size={36} className="text-primary" />
-      </div>
-    ),
-    title: "Intrusion Detection System",
-    description:
-      "Developed an ML-powered IDS to detect and classify malicious network traffic using the NSL-KDD benchmark dataset. Achieved 99.76% classification accuracy using a fine-tuned Random Forest model.",
-    technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Streamlit", "Scikit-Learn"],
-    github: "https://github.com/Nitesh1123/Enhancing-Intrusion-Detection-Systems-Project",
-    demo: "https://niju7410-ids-intrusion-detection.hf.space/",
-    badgeComponent: <AnimatedBadge targetNumber={99.76} suffix="% Accuracy" />,
-  },
-  {
-    iconComponent: (
-      <div className="p-3 bg-accent/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--accent)_/_0.3)]">
-        <BrainCircuit size={36} className="text-accent" />
-      </div>
-    ),
-    title: "Machine Learning Model",
-    description:
-      "Implemented and compared Logistic Regression and Random Forest for binary and multi-class classification. Evaluated using accuracy, precision, recall, and F1-score metrics.",
-    technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Streamlit", "Scikit-Learn"],
-    github: "https://github.com/Nitesh1123",
-    demo: "#",
-  },
-  {
-    iconComponent: (
-      <div className="p-3 bg-secondary/10 rounded-2xl w-fit drop-shadow-[0_0_15px_hsl(var(--secondary)_/_0.3)]">
-        <MessageCircle size={36} className="text-secondary" />
-      </div>
-    ),
-    title: "Real-Time Chat Application",
-    description:
-      "Engineered a secure real-time chat platform with JWT authentication, role-based access, one-to-one and group messaging via WebSockets, with typing indicators and online presence.",
-    technologies: ["React", "Node.js", "Express.js", "MongoDB", "WebSockets"],
-    github: "https://github.com/Nitesh1123/ChatApplication",
-    demo: "https://chat-application-six-sooty.vercel.app/",
-  },
-  {
-    iconComponent: <MiniBarChart />,
-    title: "Disk Scheduling Simulator",
-    description:
-      "An interactive web-based simulator for visualizing operating system disk scheduling algorithms including FCFS, SCAN, C-SCAN, and more. Features real-time algorithm visualization and performance metrics.",
-    technologies: ["JavaScript", "HTML/CSS", "Algorithms"],
-    github: "https://github.com/rai-kriti/OS",
-    demo: "https://rai-kriti.github.io/OS/",
-  },
-];
+gsap.registerPlugin(ScrollTrigger);
 
 export const ProjectsSection = () => {
-  const handleGithubClick = (githubUrl: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    if (githubUrl && githubUrl !== "#") {
-      window.open(githubUrl, "_blank");
-    }
-  };
+  const wrapRef = useRef<HTMLDivElement>(null);
 
-  const handleDemoClick = (demoUrl: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    if (demoUrl && demoUrl !== "#") {
-      window.open(demoUrl, "_blank");
-    }
-  };
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced || !wrapRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>(".project-card");
+
+      cards.forEach((card, i) => {
+        if (i === cards.length - 1) return;
+
+        // Pin each card at viewport top
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top top",
+          endTrigger: cards[cards.length - 1],
+          end: "top top",
+          pin: true,
+          pinSpacing: false,
+        });
+
+        // Scale + fade as next card scrolls in — card stacking from gpt-taste
+        gsap.to(card, {
+          scale: 0.94,
+          opacity: 0.45,
+          yPercent: -3,
+          ease: "none",
+          scrollTrigger: {
+            trigger: cards[i + 1],
+            start: "top bottom",
+            end: "top top",
+            scrub: true,
+          },
+        });
+      });
+    }, wrapRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="projects" className="py-24 relative">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "linear-gradient(180deg, hsl(0 0% 10% / 0.3) 0%, transparent 100%)",
-        }}
-      />
+    <section id="projects" className="py-32 md:py-48 relative">
+      <div className="divider" />
 
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <FadeInLeft>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 flex items-center gap-4">
-            <span className="section-number">02.</span>
-            Featured Projects
-          </h2>
-        </FadeInLeft>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 mt-20 mb-16">
+        <motion.h2
+          className="display-text gradient-text-warm"
+          style={{ fontSize: "clamp(2.4rem, 4vw, 3.8rem)", lineHeight: 1.05 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+        >
+          Selected work
+        </motion.h2>
+        <p className="mt-4 text-white/30 text-sm mono max-w-[44ch]">
+          Three projects shipped to production
+        </p>
+      </div>
 
-        {/* Live Demo Widget */}
-        <LiveDemoWidget />
+      {/* Sticky stack */}
+      <div ref={wrapRef} className="relative">
+        {projects.map((project, i) => (
+          <div
+            key={project.id}
+            className="project-card sticky top-0 min-h-[100dvh] flex items-center justify-center px-4 md:px-8 py-16"
+            style={{
+              zIndex: 10 + i,
+              backgroundColor: "#060608",
+            }}
+          >
+            {/* Per-card ambient glow */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `radial-gradient(ellipse 55% 40% at 50% 55%, ${project.accentColor}0C 0%, transparent 70%)`,
+              }}
+            />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <AnimatedCard
-              key={project.title}
-              index={index}
-              hoverEffect="glow"
-              className="glass rounded-2xl p-6 card-hover group relative"
-            >
-              {/* Badge */}
-              {(project as any).badge && (
-                <div className="absolute top-6 right-6 bg-primary/10 text-primary border border-primary/30 px-3 py-1 rounded-full text-xs font-bold drop-shadow-[0_0_10px_hsl(var(--primary)_/_0.5)] z-20">
-                  {(project as any).badge}
+            <div className="relative z-10 w-full max-w-4xl">
+              <div className="card-bezel">
+                <div className="card-inner overflow-hidden">
+                  <div className="grid grid-cols-1 md:grid-cols-2">
+
+                    {/* Left: text panel */}
+                    <div className="p-8 md:p-10 flex flex-col gap-6">
+
+                      {/* Index + category */}
+                      <div className="flex items-center gap-3">
+                        <span className="mono text-[11px] text-white/25">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span
+                          className="mono text-[11px] font-semibold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full"
+                          style={{ color: project.accentColor, background: `${project.accentColor}12`, border: `1px solid ${project.accentColor}28` }}
+                        >
+                          {project.subtitle}
+                        </span>
+                      </div>
+
+                      <div>
+                        <h3 className="display-text text-3xl md:text-4xl text-white leading-tight mb-3">
+                          {project.title}
+                        </h3>
+                        <p className="text-white/45 text-sm leading-relaxed max-w-[38ch]">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      {/* Tech pills — compact */}
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.technologies.map((tech) => (
+                          <span key={tech} className="tech-tag">{tech}</span>
+                        ))}
+                      </div>
+
+                      {/* Links */}
+                      <div className="flex items-center gap-3 mt-auto pt-2">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-ghost !text-xs !px-4 !py-2 !gap-2"
+                        >
+                          <Github size={13} />
+                          Code
+                        </a>
+                        {project.demo ? (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary !text-xs !px-4 !py-2"
+                            style={{ background: project.accentColor }}
+                          >
+                            Live
+                            <span className="btn-icon-circle">
+                              <ExternalLink size={11} />
+                            </span>
+                          </a>
+                        ) : (
+                          <span className="mono text-[11px] text-white/20">No live demo</span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Right: visual panel with highlight stat */}
+                    <div
+                      className="hidden md:flex flex-col items-center justify-center p-10 relative"
+                      style={{
+                        background: `linear-gradient(135deg, ${project.accentColor}0A 0%, transparent 60%)`,
+                        borderLeft: `1px solid ${project.accentColor}12`,
+                      }}
+                    >
+                      {/* Highlight badge — the one real data point */}
+                      <div
+                        className="display-text text-center"
+                        style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)", color: project.accentColor, lineHeight: 1.1 }}
+                      >
+                        {project.highlight}
+                      </div>
+                      <p className="mono text-[11px] text-white/25 mt-3 uppercase tracking-[0.18em]">
+                        {project.subtitle}
+                      </p>
+
+                      {/* Tech count */}
+                      <div
+                        className="mt-8 mono text-xs text-white/20 px-3 py-1.5 rounded-full"
+                        style={{ border: "1px solid rgba(255,255,255,0.06)" }}
+                      >
+                        {project.technologies.length} technologies
+                      </div>
+
+                      {/* Ambient light */}
+                      <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{ background: `radial-gradient(circle at 70% 30%, ${project.accentColor}10, transparent 60%)` }}
+                      />
+                    </div>
+                  </div>
                 </div>
-              )}
-              {(project as any).badgeComponent && (
-                <div className="absolute top-6 right-6 z-20">
-                  {(project as any).badgeComponent}
-                </div>
-              )}
+              </div>
 
-              {/* Icon / Visualization */}
-              <motion.div
-                className="mb-8"
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ duration: 0.2 }}
-              >
-                {project.iconComponent}
-              </motion.div>
-
-              {/* Title */}
-              <h3 className="text-xl font-bold text-foreground mb-4">{project.title}</h3>
-
-              {/* Description */}
-              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                {project.description}
-              </p>
-
-              {/* Technologies */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {project.technologies.map((tech) => (
-                  <span key={tech} className="tech-tag text-xs">
-                    {tech}
-                  </span>
+              {/* Progress dots */}
+              <div className="flex justify-center gap-2 mt-5">
+                {projects.map((_, j) => (
+                  <div
+                    key={j}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width: j === i ? "20px" : "5px",
+                      height: "5px",
+                      background: j === i ? project.accentColor : "rgba(255,255,255,0.12)",
+                    }}
+                  />
                 ))}
               </div>
-
-              {/* Links */}
-              <div className="flex gap-3">
-                <motion.a
-                  href={project.github}
-                  onClick={(e) => handleGithubClick(project.github, e)}
-                  className="w-10 h-10 rounded-full bg-muted/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all cursor-pointer"
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Github size={18} />
-                </motion.a>
-                <motion.a
-                  href={project.demo}
-                  onClick={(e) => handleDemoClick(project.demo, e)}
-                  className="w-10 h-10 rounded-full bg-muted/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all cursor-pointer"
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ExternalLink size={18} />
-                </motion.a>
-              </div>
-            </AnimatedCard>
-          ))}
-        </div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
