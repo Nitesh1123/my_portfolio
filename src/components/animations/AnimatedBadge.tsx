@@ -1,1 +1,0 @@
-// TODO: Animated badge that counts up to a number\n// Props: targetNumber (float), suffix (string e.g. '% Accuracy')\n// Animate from 0 ? targetNumber on mount\nexport const AnimatedBadge = ({ targetNumber, suffix }: { targetNumber: number; suffix: string }) => {\n  return <div>{targetNumber}{suffix}</div>;\n};

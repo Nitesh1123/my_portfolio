@@ -1,1 +1,0 @@
-// TODO: Interactive canvas neural network background for Hero section\n// Draws animated nodes connected by edges that react to mouse movement\nexport const NeuralNetworkBackground = () => {\n  return null; // TODO\n};

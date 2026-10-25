@@ -1,1 +1,0 @@
-// TODO: Full-screen animated splash/loading screen shown once on first load\n// Shows 'NK' logo animating in, then fades out revealing the portfolio\nexport const SplashScreen = () => {\n  return null; // TODO\n};
