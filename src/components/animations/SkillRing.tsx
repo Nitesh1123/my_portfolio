@@ -1,1 +1,0 @@
-// TODO: Circular SVG ring that fills based on skill level percentage\n// Props: level (1-5), color\nexport const SkillRing = ({ level, color }: { level: number; color?: string }) => {\n  return <div>{level}</div>;\n};

@@ -1,278 +1,85 @@
-/* ============================================================
-   Plus Jakarta Sans + JetBrains Mono — Self-hosted via fontsource
-   ============================================================ */
-@import "@fontsource-variable/plus-jakarta-sans";
-@import "@fontsource/jetbrains-mono/400.css";
-@import "@fontsource/jetbrains-mono/500.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ============================================================
-   DESIGN SYSTEM TOKENS — Nitesh Kumar Portfolio
-   Dark tech / Ethereal Glass aesthetic
-   Primary: Emerald #4ADE80  Secondary: Sky #38BDF8
-   ============================================================ */
-
-@layer base {
-  :root {
-    /* Core */
-    --background: 228 14% 4%;
-    --foreground: 0 0% 95%;
-
-    /* Surfaces */
-    --card: 228 14% 7%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 228 14% 7%;
-    --popover-foreground: 0 0% 95%;
-
-    /* Accents */
-    --primary: 142 69% 58%;
-    --primary-foreground: 0 0% 5%;
-
-    --secondary: 199 89% 60%;
-    --secondary-foreground: 0 0% 5%;
-
-    --accent: 270 70% 65%;
-    --accent-foreground: 0 0% 100%;
-
-    /* System */
-    --muted: 228 14% 12%;
-    --muted-foreground: 0 0% 50%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 228 14% 14%;
-    --input: 228 14% 12%;
-    --ring: 142 69% 58%;
-    --radius: 1rem;
-
-    /* Custom tokens */
-    --glass-bg: rgba(13, 13, 18, 0.72);
-    --glass-border: rgba(255, 255, 255, 0.07);
-    --glass-highlight: rgba(255, 255, 255, 0.04);
-    --emerald: #4ADE80;
-    --sky: #38BDF8;
-    --purple: #A855F7;
-    --glow-emerald: rgba(74, 222, 128, 0.18);
-    --glow-sky: rgba(56, 189, 248, 0.18);
-    --glow-purple: rgba(168, 85, 247, 0.18);
-  }
+:root {
+  --bg: 247 246 243;
+  --fg: 22 22 24;
+  --muted: 108 108 114;
+  --surface: 255 255 255;
+  --accent: 214 84 36;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  color-scheme: light;
 }
 
-/* ============================================================
-   BASE RESETS
-   ============================================================ */
-@layer base {
-  * {
-    @apply border-border;
-    box-sizing: border-box;
-  }
+.dark {
+  --bg: 11 11 12;
+  --fg: 236 236 232;
+  --muted: 140 140 146;
+  --surface: 22 22 24;
+  --accent: 255 136 74;
+  color-scheme: dark;
+}
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  @apply bg-bg font-sans text-fg antialiased;
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  @apply bg-accent text-bg;
+}
+
+:focus-visible {
+  @apply rounded-sm outline outline-2 outline-offset-4 outline-accent;
+}
+
+/* Scroll-triggered reveal. Gated on .js so content is visible without JavaScript. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(6px);
+  transition:
+    opacity 0.9s var(--ease) var(--delay, 0ms),
+    transform 0.9s var(--ease) var(--delay, 0ms),
+    filter 0.9s var(--ease) var(--delay, 0ms);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Cursor-following highlight on project cards. */
+.spotlight {
+  background: radial-gradient(
+    420px circle at var(--x, 50%) var(--y, 50%),
+    rgb(var(--fg) / 0.05),
+    transparent 70%
+  );
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: auto;
   }
 
-  body {
-    @apply bg-background text-foreground overflow-x-hidden;
-    font-family: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", system-ui, sans-serif;
-  }
-
-  ::selection {
-    background: rgba(74, 222, 128, 0.25);
-    color: #4ADE80;
-  }
-
-  /* Scrollbar styling */
-  ::-webkit-scrollbar {
-    width: 4px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: rgba(74, 222, 128, 0.3);
-    border-radius: 2px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(74, 222, 128, 0.6);
-  }
-}
-
-/* ============================================================
-   COMPONENT UTILITIES
-   ============================================================ */
-@layer components {
-  /* --- Glass morphism (Ethereal Glass vibe) --- */
-  .glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    box-shadow: inset 0 1px 0 var(--glass-highlight);
-  }
-
-  /* --- Double-bezel card (from high-end-visual-design skill) --- */
-  .card-bezel {
-    padding: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 1.5rem;
-    background: rgba(255, 255, 255, 0.02);
-  }
-
-  .card-inner {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    border-radius: calc(1.5rem - 6px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  }
-
-  /* --- Typography --- */
-  .display-text {
-    font-family: "Plus Jakarta Sans Variable", sans-serif;
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.03em;
-  }
-
-  .mono {
-    font-family: "JetBrains Mono", monospace;
-  }
-
-  .gradient-text {
-    background: linear-gradient(135deg, var(--emerald), var(--sky));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-
-  .gradient-text-warm {
-    background: linear-gradient(135deg, #F0F0F2 30%, rgba(240, 240, 242, 0.5));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-
-  /* --- CTA Buttons --- */
-  .btn-primary {
-    @apply inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-sm;
-    background: var(--emerald);
-    color: #050508;
-    transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(74, 222, 128, 0.35);
-  }
-
-  .btn-primary:active {
-    transform: scale(0.98) translateY(0);
-  }
-
-  .btn-ghost {
-    @apply inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-sm;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: rgba(240, 240, 242, 0.8);
-    background: transparent;
-    transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-  }
-
-  .btn-ghost:hover {
-    border-color: rgba(74, 222, 128, 0.4);
-    color: var(--emerald);
-    background: rgba(74, 222, 128, 0.06);
-    transform: translateY(-2px);
-  }
-
-  .btn-ghost:active {
-    transform: scale(0.98) translateY(0);
-  }
-
-  /* Icon circle inside CTA (button-in-button pattern) */
-  .btn-icon-circle {
-    @apply flex items-center justify-center w-7 h-7 rounded-full;
-    background: rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-  }
-
-  .btn-primary:hover .btn-icon-circle {
-    transform: translate(2px, -1px) scale(1.05);
-  }
-
-  /* --- Tech tags --- */
-  .tech-tag {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mono;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: rgba(240, 240, 242, 0.65);
-    transition: all 0.2s ease;
-  }
-
-  .tech-tag:hover {
-    background: rgba(74, 222, 128, 0.08);
-    border-color: rgba(74, 222, 128, 0.25);
-    color: var(--emerald);
-  }
-
-  /* --- Section number (eyebrow) --- */
-  .section-eyebrow {
-    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] uppercase font-medium tracking-[0.2em] mono;
-    background: rgba(74, 222, 128, 0.08);
-    border: 1px solid rgba(74, 222, 128, 0.2);
-    color: var(--emerald);
-  }
-
-  /* --- Glow orbs (background decorations) --- */
-  .orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* --- Section headings --- */
-  .section-heading {
-    @apply text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight;
-    font-family: "Plus Jakarta Sans Variable", sans-serif;
-  }
-
-  /* --- Horizontal divider --- */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-  }
-
-  /* Scrollbar hide utility */
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-}
-
-/* ============================================================
-   GSAP + ANIMATION HELPERS
-   ============================================================ */
-@layer utilities {
-  /* Clip-path for text reveals */
-  .clip-reveal {
-    clip-path: inset(0 0 100% 0);
-  }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 }

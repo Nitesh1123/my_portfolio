@@ -1,1 +1,0 @@
-// TODO: Reusable framer-motion wrappers\n// Exports: FadeInUp, FadeInLeft — animate children into view on scroll\nimport { ReactNode } from 'react';\nexport const FadeInUp = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => <div>{children}</div>;\nexport const FadeInLeft = ({ children }: { children: ReactNode }) => <div>{children}</div>;

@@ -1,1 +1,0 @@
-// TODO: Animated wrapper card with hover effects\n// Props: children, index (for staggered delay), hoverEffect ('glow' | 'lift'), className\nimport { ReactNode } from 'react';\nexport const AnimatedCard = ({ children, className }: { children: ReactNode; index?: number; hoverEffect?: string; className?: string }) => {\n  return <div className={className}>{children}</div>;\n};
