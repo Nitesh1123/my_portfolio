@@ -1,1 +1,0 @@
-// TODO: Custom cursor that replaces the default on desktop (pointer: fine)\n// A glowing dot that follows mouse movement with a trailing ring\nexport const CustomCursor = () => {\n  return null; // TODO\n};
