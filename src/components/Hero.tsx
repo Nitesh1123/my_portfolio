@@ -29,7 +29,7 @@ export function Hero() {
         className="reveal max-w-4xl text-[clamp(2.4rem,6.4vw,5.25rem)] font-medium leading-[1.02] tracking-[-0.035em]"
         style={delay(200)}
       >
-        I build real-time backends and machine learning tools that hold up under load.
+        I build real-time backends, AI tools and data pipelines that hold up under load.
       </h1>
 
       <p
@@ -69,7 +69,7 @@ export function Hero() {
       >
         <Fact label="Based in" value={profile.location} />
         <Fact label="Local time" value={`${time} IST`} />
-        <Fact label="Focus" value="Backend · ML" />
+        <Fact label="Focus" value="Backend · Data · AI" />
         <Fact label="Studying" value="B.Tech CSE, 2027" />
       </dl>
     </section>

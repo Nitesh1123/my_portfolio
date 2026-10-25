@@ -8,8 +8,8 @@ export function About() {
       <div className="grid gap-16 md:grid-cols-12">
         <div className="reveal space-y-5 text-lg leading-relaxed md:col-span-5">
           <p>
-            Most of what I build sits behind an interface: message pipelines, socket servers, retrieval systems and
-            classifiers. I like problems where the hard part is making something correct under load or under
+            Most of what I build sits behind an interface: message brokers, socket servers, retrieval systems and
+            ETL jobs. I like problems where the hard part is making something correct under load or under
             uncertainty, not just making it render.
           </p>
           <p className="text-muted">
