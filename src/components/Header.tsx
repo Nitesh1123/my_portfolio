@@ -4,7 +4,6 @@ import { profile } from "@/data";
 
 const nav = [
   { id: "work", label: "Work" },
-  { id: "archive", label: "Archive" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ];

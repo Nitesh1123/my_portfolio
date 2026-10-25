@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Work } from "@/components/Work";
-import { Archive } from "@/components/Archive";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 
@@ -28,7 +27,6 @@ export default function App() {
       <main className="mx-auto max-w-page px-5 sm:px-8">
         <Hero />
         <Work />
-        <Archive />
         <About />
         <Contact />
       </main>
