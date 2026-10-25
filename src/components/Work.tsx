@@ -1,13 +1,13 @@
 import type { PointerEvent } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { featured, type Project } from "@/data";
+import { projects, type Project } from "@/data";
 import { Section } from "@/components/Section";
 
 export function Work() {
   return (
-    <Section id="work" index="01" title="Selected work">
+    <Section id="work" index="01" title="Projects">
       <div className="space-y-4">
-        {featured.map((project, i) => (
+        {projects.map((project, i) => (
           <ProjectCard key={project.title} project={project} index={i + 1} />
         ))}
       </div>
@@ -46,7 +46,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <p className="leading-relaxed">{project.description}</p>
 
         <ul className="mt-6 space-y-2.5 text-sm text-muted">
-          {project.points?.map((point) => (
+          {project.points.map((point) => (
             <li key={point} className="flex gap-3">
               <span className="mt-[0.6em] h-px w-3 shrink-0 bg-accent" />
               {point}

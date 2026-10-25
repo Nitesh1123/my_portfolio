@@ -20,7 +20,7 @@ export function Contact() {
   };
 
   return (
-    <Section id="contact" index="04" title="Contact">
+    <Section id="contact" index="03" title="Contact">
       <div className="reveal">
         <p className="max-w-3xl text-[clamp(2rem,5vw,4rem)] font-medium leading-[1.05] tracking-[-0.03em]">
           Have a role or a project in mind? I reply to every email.

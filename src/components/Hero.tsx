@@ -29,7 +29,7 @@ export function Hero() {
         className="reveal max-w-4xl text-[clamp(2.4rem,6.4vw,5.25rem)] font-medium leading-[1.02] tracking-[-0.035em]"
         style={delay(200)}
       >
-        I build real-time backends, data pipelines and the ML tools on top of them.
+        I build real-time backends and machine learning tools that hold up under load.
       </h1>
 
       <p
@@ -37,8 +37,8 @@ export function Hero() {
         style={delay(350)}
       >
         I'm {profile.name}, a final-year computer science student at Lovely Professional University. Recently: a
-        Kafka-backed chat platform, a cited-answer research assistant for equities, and a forecasting pipeline that
-        feeds an inventory optimiser.
+        Kafka-backed chat platform built as microservices, and a research assistant that answers questions about
+        companies with cited sources.
       </p>
 
       <div
@@ -69,7 +69,7 @@ export function Hero() {
       >
         <Fact label="Based in" value={profile.location} />
         <Fact label="Local time" value={`${time} IST`} />
-        <Fact label="Focus" value="Backend · Data · ML" />
+        <Fact label="Focus" value="Backend · ML" />
         <Fact label="Studying" value="B.Tech CSE, 2027" />
       </dl>
     </section>

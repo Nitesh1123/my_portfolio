@@ -4,17 +4,17 @@ import { Section } from "@/components/Section";
 
 export function About() {
   return (
-    <Section id="about" index="03" title="About">
+    <Section id="about" index="02" title="About">
       <div className="grid gap-16 md:grid-cols-12">
         <div className="reveal space-y-5 text-lg leading-relaxed md:col-span-5">
           <p>
-            Most of what I build sits behind an interface: message pipelines, background workers, retrieval systems and
-            forecasting models. I like problems where the hard part is making something correct under load or under
+            Most of what I build sits behind an interface: message pipelines, socket servers, retrieval systems and
+            classifiers. I like problems where the hard part is making something correct under load or under
             uncertainty, not just making it render.
           </p>
           <p className="text-muted">
             I work across the stack when a project needs it, and I care about the boring parts that keep a system
-            honest: clear failure modes, tracked experiments and baselines worth beating.
+            dependable: clear failure modes, honest evaluation and code someone else can pick up.
           </p>
         </div>
 
