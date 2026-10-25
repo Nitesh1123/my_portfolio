@@ -33,9 +33,9 @@ export const projects: Project[] = [
     description:
       "A real-time chat system split into three microservices (API, Socket and Consumer) so each part scales on its own. Messages flow through Kafka, and Redis pub/sub carries delivery and presence across socket servers.",
     points: [
-      "Cut message delivery latency by 70% with Socket.IO and Redis pub/sub",
+      "Cut message delivery latency by ~70% with Socket.IO and Redis pub/sub",
       "Event-driven Kafka pipeline handling 1,000+ messages/min with zero message loss",
-      "Improved system performance by 60% by decoupling database writes through an async Kafka consumer with Prisma",
+      "Improved system performance by ~60% by decoupling database writes through an async Kafka consumer with Prisma",
     ],
     stack: ["TypeScript", "React", "Express", "Socket.IO", "Kafka", "Redis", "PostgreSQL"],
     code: "https://github.com/Nitesh1123/SwiftChat",
@@ -52,32 +52,31 @@ export const projects: Project[] = [
       "Turns unstructured financial news into a searchable knowledge base",
       "Ingestion layer pulls and parses articles from news URLs and APIs to keep research current",
     ],
-    stack: ["Python", "LangChain", "FAISS", "Streamlit"],
+    stack: ["Python", "LangChain", "Google Gemini", "FAISS", "Streamlit"],
     code: "https://github.com/Nitesh1123/equity-research-tool",
     live: "https://equity-research-tool-7kkour4wxz3wuccdakcuhi.streamlit.app/",
   },
   {
-    title: "Intrusion Detection System",
-    year: 2025,
-    summary: "Classifying network traffic with machine learning",
+    title: "Retail Sales Analytics",
+    year: 2026,
+    summary: "End-to-end pipeline and BI dashboard",
     description:
-      "Classifies network traffic anomalies on the 41-feature NSL-KDD benchmark dataset, from exploratory analysis through to a deployed web app.",
+      "An ETL and analytics pipeline on a 9,994-row retail orders dataset: raw data is cleaned and enriched in Python, loaded into SQL Server, queried with T-SQL and presented in Power BI.",
     points: [
-      "Random Forest with balanced class weights: 99.76% validation accuracy",
-      "EDA with correlation heatmaps, class distributions and statistical t-tests",
-      "Streamlit app for batch CSV prediction, single-record inference and metrics",
+      "Engineered discount, sale-price and profit features, then modelled and loaded a SQL Server table with Pandas",
+      "9 T-SQL queries using CTEs, ROW_NUMBER() and conditional aggregation for revenue, regional and YoY questions",
+      "Power BI dashboards that turn sales and profitability trends into views for non-technical stakeholders",
     ],
-    stack: ["Python", "scikit-learn", "Pandas", "NumPy", "Streamlit"],
-    code: "https://github.com/Nitesh1123/Enhancing-Intrusion-Detection-Systems-Project",
+    stack: ["Python", "Pandas", "SQL Server", "T-SQL", "Power BI", "DAX"],
+    code: "https://github.com/Nitesh1123/Retail-Orders-Analysis-with-SQL-Python",
   },
 ];
 
 export const stack = [
-  { label: "Languages", items: "Python, JavaScript, TypeScript, Java" },
-  { label: "Backend", items: "Node.js, Express, Socket.IO, Kafka, Redis" },
-  { label: "Data & ML", items: "Pandas, NumPy, scikit-learn, LangChain, Streamlit" },
-  { label: "Databases", items: "PostgreSQL, MongoDB, Prisma" },
-  { label: "Tools", items: "Git, VS Code, Excel, Power BI" },
+  { label: "Languages", items: "Python, JavaScript, TypeScript, SQL, Java" },
+  { label: "Web & backend", items: "React, Node.js, Express, FastAPI, Socket.IO, Kafka" },
+  { label: "Databases", items: "PostgreSQL, MySQL, MongoDB, Redis" },
+  { label: "Tools", items: "Git, Docker, Prisma, LangChain, Power BI" },
 ];
 
 export const education = [
